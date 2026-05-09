@@ -1,0 +1,8 @@
+interface:
+  display_name: "SPDD REASONS Canvas"
+  short_description: "Generate a REASONS Canvas prompt"
+  brand_color: "#0F766E"
+  default_prompt: "Use $spdd-reasons-canvas on spdd/analysis/EXAMPLE.md."
+
+policy:
+  allow_implicit_invocation: false

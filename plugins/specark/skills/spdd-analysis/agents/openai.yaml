@@ -1,0 +1,8 @@
+interface:
+  display_name: "SPDD Analysis"
+  short_description: "Strategic analysis for SPDD requirements"
+  brand_color: "#0F766E"
+  default_prompt: "Use $spdd-analysis on requirements/STORY-001-example.md."
+
+policy:
+  allow_implicit_invocation: false

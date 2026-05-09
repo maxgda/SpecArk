@@ -1,0 +1,8 @@
+interface:
+  display_name: "SPDD Orchestrator"
+  short_description: "Run the full SPDD workflow"
+  brand_color: "#0F766E"
+  default_prompt: "Use $spdd-orchestrator on @idea-of-the-enhancement.md in semi-auto mode."
+
+policy:
+  allow_implicit_invocation: false

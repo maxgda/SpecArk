@@ -1,0 +1,20 @@
+{
+  "name": "specark",
+  "interface": {
+    "displayName": "SpecArk"
+  },
+  "plugins": [
+    {
+      "name": "specark",
+      "source": {
+        "source": "local",
+        "path": "./plugins/specark"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "Engineering"
+    }
+  ]
+}

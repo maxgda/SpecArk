@@ -1,0 +1,29 @@
+{
+  "name": "specark",
+  "version": "0.1.0",
+  "description": "Structured Prompt-Driven Development workflow for story creation, analysis, REASONS Canvas prompt generation, implementation, prompt updates, and sync.",
+  "keywords": [
+    "spdd",
+    "requirements",
+    "analysis",
+    "prompt-driven-development",
+    "reasons-canvas"
+  ],
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "SpecArk",
+    "shortDescription": "Structured workflow for prompt-driven delivery",
+    "longDescription": "SpecArk is a Codex plugin for Structured Prompt-Driven Development: story splitting, strategic analysis, REASONS Canvas prompt generation, implementation, prompt updates, and sync.",
+    "category": "Engineering",
+    "capabilities": [
+      "Read",
+      "Write"
+    ],
+    "defaultPrompt": [
+      "Use the spdd-orchestrator skill on @idea-of-the-enhancement.md in semi-auto mode.",
+      "Use the spdd-orchestrator skill in resume mode on @spdd/analysis/EXAMPLE.md.",
+      "Use the spdd-sync skill on spdd/prompt/EXAMPLE.md after this refactor."
+    ],
+    "brandColor": "#0F766E"
+  }
+}

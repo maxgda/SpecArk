@@ -1,0 +1,8 @@
+interface:
+  display_name: "SPDD Prompt Update"
+  short_description: "Revise an SPDD prompt after changes"
+  brand_color: "#0F766E"
+  default_prompt: "Use $spdd-prompt-update on spdd/prompt/EXAMPLE.md."
+
+policy:
+  allow_implicit_invocation: false

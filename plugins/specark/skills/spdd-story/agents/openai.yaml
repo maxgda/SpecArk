@@ -1,0 +1,8 @@
+interface:
+  display_name: "SPDD Story"
+  short_description: "Split a feature into SPDD stories"
+  brand_color: "#0F766E"
+  default_prompt: "Use $spdd-story to split this feature into implementable stories."
+
+policy:
+  allow_implicit_invocation: false

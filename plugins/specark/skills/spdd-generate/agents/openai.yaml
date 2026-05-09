@@ -1,0 +1,8 @@
+interface:
+  display_name: "SPDD Generate"
+  short_description: "Implement code from an SPDD prompt"
+  brand_color: "#0F766E"
+  default_prompt: "Use $spdd-generate on spdd/prompt/EXAMPLE.md."
+
+policy:
+  allow_implicit_invocation: false
