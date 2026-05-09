@@ -76,6 +76,10 @@ export default {
             { text: "Getting Started", link: "/getting-started" },
             { text: "Installation", link: "/installation" },
             { text: "Plugin Layout", link: "/plugin-layout" },
+            { text: "Limitations", link: "/limitations" },
+            { text: "Next Steps", link: "/next-steps" },
+            { text: "Release Notes", link: "/release-notes" },
+            { text: "Maintainer Notes", link: "/maintainer-notes" },
             { text: "Contributing", link: "/contributing" }
           ]
         },

@@ -17,6 +17,7 @@ Use SpecArk when you want:
 1. Install or wire the plugin from a Git-backed marketplace.
 2. Start with the orchestrator unless you already know the exact phase you need.
 3. Move phase by phase using generated artifacts instead of restating the requirement in chat.
+4. Use `spdd-api-test` after implementation when API verification artifacts matter.
 
 ## Typical first commands
 
@@ -38,6 +39,12 @@ Existing prompt:
 Use the spdd-generate skill on @spdd/prompt/EXAMPLE.md.
 ```
 
+Generate API-oriented tests:
+
+```text
+Use the spdd-api-test skill on @spdd/prompt/EXAMPLE.md.
+```
+
 ## How the repository stays organized
 
 The plugin itself lives under `plugins/specark/`, but generated SPDD artifacts belong to the consuming project, not the plugin.
@@ -54,4 +61,6 @@ Expected project-local artifact folders are:
 1. [Installation](/installation)
 2. [Workflow Overview](/workflow/)
 3. [Skill Index](/skills/)
-4. [Plugin Layout](/plugin-layout)
+4. [Limitations](/limitations)
+5. [Maintainer Notes](/maintainer-notes)
+6. [Plugin Layout](/plugin-layout)
