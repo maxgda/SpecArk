@@ -1,0 +1,44 @@
+# macOS
+.DS_Store
+
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+
+# Virtual environments
+.venv/
+venv/
+env/
+
+# Node
+node_modules/
+
+# Editors / IDEs
+.idea/
+.vscode/
+
+# Logs
+*.log
+
+# Build / temp
+dist/
+build/
+tmp/
+temp/
+
+# Local generated SPDD artifacts in consuming projects
+requirements/
+spdd/analysis/
+spdd/prompt/
+spdd/context/
+spdd/tests/
+
+# Optional plugin assets generated later
+plugins/spdd/assets/
