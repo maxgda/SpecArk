@@ -4,6 +4,7 @@ All notable changes to this plugin package should be documented in this file.
 
 ## Unreleased
 
+- Added a VitePress-based developer documentation site with GitHub Pages deployment workflow.
 - Renamed the plugin package from `spdd` to `specark` while keeping all `spdd-*` skill names unchanged.
 - Added `spdd-orchestrator` as a first-class workflow controller skill.
 - Added the shared orchestration contract in `plugins/specark/references/orchestrator-contract.md`.

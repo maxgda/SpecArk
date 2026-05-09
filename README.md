@@ -4,6 +4,21 @@ This repository packages Structured Prompt-Driven Development as a Codex plugin 
 
 The workflow is based on the SPDD process described in Martin Fowler's article, "Structured-Prompt-Driven Development (SPDD)": [martinfowler.com/articles/structured-prompt-driven](https://martinfowler.com/articles/structured-prompt-driven/).
 
+## Documentation
+
+Developer documentation now lives in the VitePress site under `docs/`.
+
+Local docs commands:
+
+```bash
+npm install
+npm run docs:dev
+npm run docs:build
+npm run docs:preview
+```
+
+The repository also includes a GitHub Pages workflow at `.github/workflows/deploy-docs.yml`.
+
 ## Status
 
 - Canonical SPDD command text is preserved under `plugins/specark/references/source-commands/`.
