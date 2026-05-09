@@ -23,6 +23,8 @@ node_modules/
 # Editors / IDEs
 .idea/
 .vscode/
+*.swp
+*.swo
 
 # Logs
 *.log
@@ -32,6 +34,8 @@ dist/
 build/
 tmp/
 temp/
+docs/.vitepress/cache/
+docs/.vitepress/dist/
 
 # Local generated SPDD artifacts in consuming projects
 requirements/
@@ -42,3 +46,4 @@ spdd/tests/
 
 # Optional plugin assets generated later
 plugins/spdd/assets/
+plugins/specark/assets/
