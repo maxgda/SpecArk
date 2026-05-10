@@ -11,7 +11,7 @@ Use it when your repository needs a repeatable path from broad request to implem
 ### Codex — two-command startup
 
 ```bash
-codex plugin marketplace add <owner>/<repo>
+codex plugin marketplace add maxgda/SpecArk
 codex plugin marketplace upgrade
 ```
 
