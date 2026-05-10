@@ -16,6 +16,7 @@ SKILLS_ROOT = PLUGIN_ROOT / "skills"
 
 REQUIRED_SKILLS = [
     "spdd-orchestrator",
+    "spdd-plan",
     "spdd-story",
     "spdd-analysis",
     "spdd-reasons-canvas",
@@ -24,6 +25,9 @@ REQUIRED_SKILLS = [
     "spdd-sync",
     "spdd-api-test",
 ]
+
+RICH_SKILLS = {"spdd-orchestrator", "spdd-plan"}
+CANONICAL_PHASE_SKILLS = set(REQUIRED_SKILLS) - RICH_SKILLS
 
 
 def fail(message: str) -> None:
@@ -113,10 +117,13 @@ def validate_sources() -> None:
 def validate_shared_references() -> None:
     orchestrator_ref = PLUGIN_ROOT / "references" / "orchestrator-contract.md"
     reasons_ref = PLUGIN_ROOT / "references" / "reasons-canvas.md"
+    skill_authoring_ref = PLUGIN_ROOT / "references" / "high-quality-skill-authoring.md"
     if not orchestrator_ref.exists():
         fail(f"missing orchestrator contract reference: {orchestrator_ref}")
     if not reasons_ref.exists():
         fail(f"missing reasons reference: {reasons_ref}")
+    if not skill_authoring_ref.exists():
+        fail(f"missing skill authoring reference: {skill_authoring_ref}")
 
 
 def validate_skill(skill_name: str) -> None:
@@ -134,7 +141,7 @@ def validate_skill(skill_name: str) -> None:
     if len(text.splitlines()) >= 500:
         fail(f"{skill_md} should stay below 500 lines for progressive disclosure")
     canonical_ref = f"`../../references/source-commands/{skill_name}.md`"
-    if skill_name != "spdd-orchestrator" and canonical_ref not in text:
+    if skill_name in CANONICAL_PHASE_SKILLS and canonical_ref not in text:
         fail(f"canonical reference missing in {skill_md}")
     if f"name: /{skill_name}" in text:
         fail(f"embedded canonical command text should not be duplicated inline in {skill_md}")
@@ -146,6 +153,18 @@ def validate_skill(skill_name: str) -> None:
                 continue
             if f"`../{phase_skill}/SKILL.md`" not in text:
                 fail(f"orchestrator skill must reference ../{phase_skill}/SKILL.md")
+    elif skill_name == "spdd-plan":
+        required_refs = [
+            "`../../references/high-quality-skill-authoring.md`",
+            "`../../references/orchestrator-contract.md`",
+            "`../spdd-story/SKILL.md`",
+            "`../spdd-analysis/SKILL.md`",
+        ]
+        for required_ref in required_refs:
+            if required_ref not in text:
+                fail(f"spdd-plan skill must reference {required_ref}")
+        if "SPDD_PLAN_RESULT" not in text:
+            fail(f"{skill_md} must define the standard planning result block")
     else:
         if "SPDD_PHASE_RESULT" not in text:
             fail(f"{skill_md} must define the standard SPDD phase result block")
@@ -169,6 +188,14 @@ def validate_skill(skill_name: str) -> None:
         fail(f"openai.yaml default_prompt missing for {skill_name}")
 
 
+def validate_plan_naming_support() -> None:
+    script = (PLUGIN_ROOT / "scripts" / "derive_spdd_filename.py").read_text()
+    if '"plan"' not in script:
+        fail("derive_spdd_filename.py must support the plan artifact kind")
+    if "[Plan]" not in script:
+        fail("derive_spdd_filename.py must emit [Plan] filenames for plan artifacts")
+
+
 def main() -> None:
     validate_plugin_json()
     validate_marketplace()
@@ -176,6 +203,7 @@ def main() -> None:
     validate_shared_references()
     for skill_name in REQUIRED_SKILLS:
         validate_skill(skill_name)
+    validate_plan_naming_support()
     print("OK: plugin manifest, marketplace, canonical sources, and skills validated")
 
 

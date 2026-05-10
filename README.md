@@ -2,7 +2,7 @@
 
 Structured Prompt-Driven Development for Codex, packaged as a Git-distributed plugin bundle.
 
-SpecArk turns SPDD into an explicit, artifact-driven workflow instead of a loose series of prompts. You move from requirement to analysis to implementation by handing files from one phase to the next.
+SpecArk turns SPDD into an explicit, artifact-driven workflow instead of a loose series of prompts. You move from planning or requirement shaping to analysis to implementation by handing files from one phase to the next.
 
 > Based on Martin Fowler's article, [Structured Prompt-Driven Development (SPDD)](https://martinfowler.com/articles/structured-prompt-driven/).
 
@@ -71,6 +71,7 @@ CHANGELOG.md
 
 The normal SPDD flow is:
 
+0. optional `spdd-plan`
 1. `spdd-story`
 2. `spdd-analysis`
 3. `spdd-reasons-canvas`
@@ -94,6 +95,7 @@ Use the spdd-generate skill on @spdd/prompt/PROMPT-001.md.
 
 Expected project-local artifact folders:
 
+- `spdd/plan/`
 - `requirements/`
 - `spdd/analysis/`
 - `spdd/prompt/`
@@ -155,6 +157,7 @@ Typical output target:
 ## Included Skills
 
 - `spdd-orchestrator`: coordinate the workflow across phases and review gates
+- `spdd-plan`: turn broad product direction into ordered delivery slices before story generation
 - `spdd-story`: split a broad requirement into implementation-sized stories
 - `spdd-analysis`: turn a story or requirement into strategic engineering context
 - `spdd-reasons-canvas`: generate the implementation-ready REASONS prompt

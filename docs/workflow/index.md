@@ -6,6 +6,7 @@ SpecArk expresses SPDD as a sequence of explicit phases, with artifacts passed f
 
 The usual progression is:
 
+0. optional `spdd-plan` when the input is still roadmap-sized and needs ordered delivery slices
 1. `spdd-story` when a requirement is too broad and needs decomposition
 2. `spdd-analysis` for strategic and architectural understanding
 3. `spdd-reasons-canvas` to produce the implementation prompt
@@ -24,12 +25,15 @@ Each phase should produce repository files that become the next phase’s inputs
 Typical artifact path progression:
 
 ```text
+spdd/plan/PLAN-EXAMPLE.md
 requirements/STORY-001-example.md
 spdd/analysis/EXAMPLE.md
 spdd/prompt/EXAMPLE.md
 <implementation files>
 spdd/tests/<verification assets>
 ```
+
+`spdd-plan` is explicitly invoked and optional. The orchestrator still starts broad inputs at `spdd-story` until a separate change updates the start-phase contract.
 
 ## Why the workflow matters
 

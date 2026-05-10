@@ -1,0 +1,8 @@
+interface:
+  display_name: "SPDD Plan"
+  short_description: "Plan broad work into SPDD delivery slices"
+  brand_color: "#0F766E"
+  default_prompt: "Use $spdd-plan to turn this broad initiative into ordered delivery slices."
+
+policy:
+  allow_implicit_invocation: false

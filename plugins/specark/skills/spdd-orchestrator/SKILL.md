@@ -34,6 +34,7 @@ It must not:
 Before orchestrating, read these files:
 
 - `../../references/orchestrator-contract.md`
+- `../spdd-plan/SKILL.md`
 - `../spdd-story/SKILL.md`
 - `../spdd-analysis/SKILL.md`
 - `../spdd-reasons-canvas/SKILL.md`
@@ -122,6 +123,7 @@ Infer the starting phase from the supplied input, repository state, and the rule
 
 Use these rules:
 
+- optional explicit pre-story planning: use `spdd-plan` only when the user explicitly asks for roadmap slicing before story generation
 - broad idea, epic, PRD, or multi-capability feature: start with `spdd-story` when the requirement is too broad for direct technical analysis
 - focused requirement or existing story: start with `spdd-analysis`
 - analysis artifact in `spdd/analysis/`: start with `spdd-reasons-canvas`

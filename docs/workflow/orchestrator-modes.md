@@ -2,6 +2,8 @@
 
 `spdd-orchestrator` is the controller skill for the SPDD workflow. It does not replace the phase skills. It selects the right starting point, invokes the right phase in sequence, and respects review gates.
 
+`spdd-plan` is not part of the orchestrator's automatic start-phase detection in this release. Use it explicitly before orchestrating when a roadmap-style planning pass is needed.
+
 ## Supported modes
 
 ### `manual`

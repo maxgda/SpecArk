@@ -1,10 +1,14 @@
 # Skill Index
 
-SpecArk exposes one controller skill and seven phase skills.
+SpecArk exposes one controller skill, one optional planning skill, and seven phase skills.
 
 ## Controller
 
 - [spdd-orchestrator](/skills/spdd-orchestrator) coordinates the workflow, chooses the start phase, enforces review gates, and reports artifact lineage.
+
+## Planning
+
+- [spdd-plan](/skills/spdd-plan) turns broad or noisy product direction into ordered delivery slices before story generation begins.
 
 ## Phase skills
 
