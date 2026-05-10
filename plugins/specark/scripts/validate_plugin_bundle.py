@@ -10,7 +10,9 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[3]
 PLUGIN_ROOT = ROOT / "plugins" / "specark"
 PLUGIN_JSON = PLUGIN_ROOT / ".codex-plugin" / "plugin.json"
+CLAUDE_PLUGIN_JSON = PLUGIN_ROOT / ".claude-plugin" / "plugin.json"
 MARKETPLACE_JSON = ROOT / ".agents" / "plugins" / "marketplace.json"
+CLAUDE_MARKETPLACE_JSON = ROOT / ".claude-plugin" / "marketplace.json"
 SOURCES_MD = PLUGIN_ROOT / "references" / "source-commands" / "SOURCES.md"
 SKILLS_ROOT = PLUGIN_ROOT / "skills"
 
@@ -188,14 +190,31 @@ def validate_skill(skill_name: str) -> None:
         fail(f"openai.yaml default_prompt missing for {skill_name}")
 
 
-def validate_claude_md() -> None:
-    claude_md = PLUGIN_ROOT / "CLAUDE.md"
-    if not claude_md.exists():
-        fail(f"missing Claude Code entry point: {claude_md}")
-    text = claude_md.read_text()
-    for skill in REQUIRED_SKILLS:
-        if skill not in text:
-            fail(f"CLAUDE.md must list skill: {skill}")
+def validate_claude_plugin_json() -> None:
+    if not CLAUDE_PLUGIN_JSON.exists():
+        fail(f"missing Claude Code plugin manifest: {CLAUDE_PLUGIN_JSON}")
+    plugin = load_json(CLAUDE_PLUGIN_JSON)
+    if not isinstance(plugin, dict):
+        fail("claude-plugin/plugin.json root must be an object")
+    if plugin.get("name") != "specark":
+        fail("claude-plugin/plugin.json name must be 'specark'")
+    for key in ["description", "version", "author", "skills"]:
+        if key not in plugin:
+            fail(f"claude-plugin/plugin.json missing '{key}'")
+
+
+def validate_claude_marketplace() -> None:
+    if not CLAUDE_MARKETPLACE_JSON.exists():
+        fail(f"missing Claude Code marketplace file: {CLAUDE_MARKETPLACE_JSON}")
+    marketplace = load_json(CLAUDE_MARKETPLACE_JSON)
+    if not isinstance(marketplace, dict):
+        fail(".claude-plugin/marketplace.json root must be an object")
+    plugins = marketplace.get("plugins")
+    if not isinstance(plugins, list) or len(plugins) != 1:
+        fail(".claude-plugin/marketplace.json must contain exactly one plugin entry")
+    entry = plugins[0]
+    if entry.get("name") != "specark":
+        fail(".claude-plugin marketplace entry name must be 'specark'")
 
 
 def validate_skill_descriptions_platform_neutral() -> None:
@@ -206,6 +225,15 @@ def validate_skill_descriptions_platform_neutral() -> None:
         text = skill_md.read_text()
         if "This Codex skill" in text or "This Codex plugin" in text:
             fail(f"platform-specific 'Codex' wording found in description of {skill_md}")
+
+
+def validate_skill_disable_invocation(skill_name: str) -> None:
+    skill_md = SKILLS_ROOT / skill_name / "SKILL.md"
+    if not skill_md.exists():
+        return
+    text = skill_md.read_text()
+    if "disable-model-invocation: true" not in text:
+        fail(f"SKILL.md missing 'disable-model-invocation: true' in frontmatter: {skill_md}")
 
 
 def validate_plan_naming_support() -> None:
@@ -224,9 +252,12 @@ def main() -> None:
     for skill_name in REQUIRED_SKILLS:
         validate_skill(skill_name)
     validate_plan_naming_support()
-    validate_claude_md()
+    validate_claude_plugin_json()
+    validate_claude_marketplace()
     validate_skill_descriptions_platform_neutral()
-    print("OK: plugin manifest, marketplace, canonical sources, skills, and Claude Code entry point validated")
+    for skill_name in REQUIRED_SKILLS:
+        validate_skill_disable_invocation(skill_name)
+    print("OK: Codex and Claude Code manifests, marketplaces, canonical sources, and skills validated")
 
 
 if __name__ == "__main__":

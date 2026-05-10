@@ -1,6 +1,7 @@
 ---
 name: spdd-reasons-canvas
 description: Generate REASONS-Canvas structured prompts from business context using the canonical repository workflow text integrated into this project.
+disable-model-invocation: true
 ---
 
 # spdd-reasons-canvas

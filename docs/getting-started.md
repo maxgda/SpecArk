@@ -23,14 +23,13 @@ codex plugin marketplace upgrade
 ```
 
 ```bash [Claude Code]
-git submodule add https://github.com/maxgda/SpecArk.git plugins/specark-plugin
-# Then add to your CLAUDE.md:
-# @plugins/specark-plugin/plugins/specark/CLAUDE.md
+claude plugin marketplace add maxgda/SpecArk
+claude plugin install specark
 ```
 
 :::
 
-See [Claude Code Installation](/installation-claude-code) for all options and verification steps.
+See [Claude Code Installation](/installation-claude-code) for full details and verification steps.
 
 ::: tip After install
 - The `spdd-*` skills are available in your session.
@@ -48,7 +47,7 @@ Use the spdd-orchestrator skill on @idea-of-the-enhancement.md in semi-auto mode
 ```
 
 ```text [Claude Code]
-Use the spdd-orchestrator skill on @idea-of-the-enhancement.md in semi-auto mode.
+/specark:spdd-orchestrator @idea-of-the-enhancement.md semi-auto
 ```
 
 :::

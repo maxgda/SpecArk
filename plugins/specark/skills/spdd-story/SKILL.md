@@ -1,6 +1,7 @@
 ---
 name: spdd-story
 description: Decompose high-level feature requirements into INVEST-compliant, business-focused stories with clear scope boundaries and testable acceptance criteria, following the canonical repository command text via the integrated reference file.
+disable-model-invocation: true
 ---
 
 # spdd-story

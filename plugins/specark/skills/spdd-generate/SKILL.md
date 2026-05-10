@@ -1,6 +1,7 @@
 ---
 name: spdd-generate
 description: Generate code from a structured SPDD prompt file following the REASONS Canvas methodology, using the canonical repository command text integrated into this project.
+disable-model-invocation: true
 ---
 
 # spdd-generate

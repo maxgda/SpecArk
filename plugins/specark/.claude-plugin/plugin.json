@@ -1,0 +1,18 @@
+{
+  "name": "specark",
+  "description": "Structured Prompt-Driven Development workflow for Claude Code — story creation, analysis, REASONS Canvas prompt generation, implementation, prompt updates, and sync.",
+  "version": "0.1.0",
+  "author": {
+    "name": "maxgda"
+  },
+  "skills": "./skills/",
+  "keywords": [
+    "spdd",
+    "requirements",
+    "analysis",
+    "prompt-driven-development",
+    "reasons-canvas"
+  ],
+  "category": "Engineering",
+  "repository": "https://github.com/maxgda/SpecArk"
+}

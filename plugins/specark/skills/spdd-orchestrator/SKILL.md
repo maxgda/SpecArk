@@ -1,6 +1,7 @@
 ---
 name: spdd-orchestrator
 description: Coordinate the full SPDD workflow from requirement to prompt to implementation using the existing SPDD phase skills, with manual, semi-auto, auto, resume, and plan-only execution modes.
+disable-model-invocation: true
 ---
 
 # spdd-orchestrator

@@ -1,6 +1,7 @@
 ---
 name: spdd-sync
 description: Sync implementation changes back to the structured SPDD prompt file following the canonical repository command text integrated into this project.
+disable-model-invocation: true
 ---
 
 # spdd-sync

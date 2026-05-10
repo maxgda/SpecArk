@@ -1,102 +1,83 @@
 # Installation — Claude Code
 
-SpecArk works with Claude Code by making the SPDD skills available in your project's context. There is no marketplace CLI for Claude Code — installation is a one-time clone or submodule step followed by a CLAUDE.md reference.
+SpecArk is distributed as a Claude Code plugin through the standard marketplace mechanism. Install it the same way you install any Claude Code plugin from a GitHub repository.
 
-## Option A: Git submodule (recommended for teams)
-
-Add SpecArk as a submodule so you can track its version and update it independently:
+## Install from the marketplace
 
 ```bash
-git submodule add https://github.com/maxgda/SpecArk.git plugins/specark-plugin
-git submodule update --init --recursive
+claude plugin marketplace add maxgda/SpecArk
+claude plugin install specark
 ```
 
-Then reference the plugin entry point in your project's `CLAUDE.md`:
+This registers the SpecArk marketplace from GitHub and installs the `specark` plugin, making all nine `spdd-*` skills available as namespaced slash commands.
 
-```markdown
-# My Project
+## Local development install
 
-@plugins/specark-plugin/plugins/specark/CLAUDE.md
-```
-
-## Option B: Direct clone (quickest start)
-
-Clone the repository into your project's plugin folder:
+For local plugin work or testing before publishing:
 
 ```bash
-git clone https://github.com/maxgda/SpecArk.git plugins/specark-plugin
+claude --plugin-dir ./plugins/specark
 ```
 
-Then add the same reference to your `CLAUDE.md`:
-
-```markdown
-@plugins/specark-plugin/plugins/specark/CLAUDE.md
-```
-
-## Option C: Copy skills only (minimal footprint)
-
-If you only want the skill files without the full plugin repository:
-
-```bash
-mkdir -p .claude/skills
-cp -r plugins/specark-plugin/plugins/specark/skills/* .claude/skills/
-```
-
-This copies all nine SPDD skills into your project's `.claude/skills/` folder. Claude Code discovers them automatically. No `CLAUDE.md` reference needed.
+This loads the plugin directly from the local directory. Useful when you are developing or modifying the plugin itself.
 
 ## Verify the install
 
-Open Claude Code in your project directory and ask:
+Check that the skills are available:
 
-```text
-What SPDD skills are available in this project?
+```bash
+claude plugin list
 ```
 
-Claude Code should list the nine `spdd-*` skills and their purposes. If it does not, confirm the `CLAUDE.md` reference path resolves correctly from your project root.
+You should see `specark` listed. All nine skills are then invokable as:
+
+```
+/specark:spdd-orchestrator
+/specark:spdd-plan
+/specark:spdd-story
+/specark:spdd-analysis
+/specark:spdd-reasons-canvas
+/specark:spdd-generate
+/specark:spdd-prompt-update
+/specark:spdd-sync
+/specark:spdd-api-test
+```
 
 ## First run
 
 Start with the orchestrator for the default guided path:
 
 ```text
-Use the spdd-orchestrator skill on @idea.md in semi-auto mode.
+/specark:spdd-orchestrator @idea.md semi-auto
 ```
 
 Or jump directly to the matching phase if you already have an artifact:
 
 ```text
-Use the spdd-story skill on @requirements/brief.md.
-Use the spdd-analysis skill on @requirements/STORY-001.md.
-Use the spdd-reasons-canvas skill on @spdd/analysis/ANALYSIS-001.md.
-Use the spdd-generate skill on @spdd/prompt/PROMPT-001.md.
+/specark:spdd-story @requirements/brief.md
+/specark:spdd-analysis @requirements/STORY-001.md
+/specark:spdd-reasons-canvas @spdd/analysis/ANALYSIS-001.md
+/specark:spdd-generate @spdd/prompt/PROMPT-001.md
 ```
 
-## Invocation syntax
+## Skill invocation reference
 
-Claude Code skills are invoked by naming them explicitly in your request. Use `@file` to reference repository files:
-
-| Action | Claude Code syntax |
+| Action | Command |
 |---|---|
-| Run orchestrator | `Use the spdd-orchestrator skill on @idea.md in semi-auto mode.` |
-| Create stories | `Use the spdd-story skill on @requirements/brief.md.` |
-| Run analysis | `Use the spdd-analysis skill on @requirements/STORY-001.md.` |
-| Generate prompt | `Use the spdd-reasons-canvas skill on @spdd/analysis/ANALYSIS-001.md.` |
-| Implement | `Use the spdd-generate skill on @spdd/prompt/PROMPT-001.md.` |
-| Update prompt | `Use the spdd-prompt-update skill on @spdd/prompt/PROMPT-001.md.` |
-| Sync after refactor | `Use the spdd-sync skill on @spdd/prompt/PROMPT-001.md.` |
+| Full orchestrated workflow | `/specark:spdd-orchestrator @idea.md semi-auto` |
+| Planning slice (optional) | `/specark:spdd-plan @idea.md` |
+| Create stories | `/specark:spdd-story @requirements/brief.md` |
+| Run analysis | `/specark:spdd-analysis @requirements/STORY-001.md` |
+| Generate prompt | `/specark:spdd-reasons-canvas @spdd/analysis/ANALYSIS-001.md` |
+| Implement | `/specark:spdd-generate @spdd/prompt/PROMPT-001.md` |
+| Update prompt after change | `/specark:spdd-prompt-update @spdd/prompt/PROMPT-001.md` |
+| Sync after refactor | `/specark:spdd-sync @spdd/prompt/PROMPT-001.md` |
+| Generate API tests | `/specark:spdd-api-test @spdd/prompt/PROMPT-001.md` |
 
-## Keeping skills up to date
-
-If you used Option A (submodule), update with:
-
-```bash
-git submodule update --remote plugins/specark-plugin
-```
-
-If you used Option B (clone), pull from the origin:
+## Keeping the plugin up to date
 
 ```bash
-git -C plugins/specark-plugin pull origin main
+claude plugin marketplace upgrade
 ```
 
 ## Read next

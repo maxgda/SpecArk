@@ -36,9 +36,8 @@ codex plugin marketplace upgrade
 ```
 
 ```bash [Claude Code]
-git submodule add https://github.com/maxgda/SpecArk.git plugins/specark-plugin
-# Add to your CLAUDE.md:
-# @plugins/specark-plugin/plugins/specark/CLAUDE.md
+claude plugin marketplace add maxgda/SpecArk
+claude plugin install specark
 ```
 
 :::
@@ -65,19 +64,35 @@ Examples:
 
 ## Step 3: Start from the smallest valid phase
 
-If you are starting broad, use the orchestrator:
+::: code-group
 
-```text
+```text [Codex — broad start]
 Use the spdd-orchestrator skill on @idea.md in semi-auto mode.
 ```
 
+```text [Claude Code — broad start]
+/specark:spdd-orchestrator @idea.md semi-auto
+```
+
+:::
+
 If you already have a more specific artifact, jump in manually:
 
-```text
+::: code-group
+
+```text [Codex]
 Use the spdd-analysis skill on @requirements/feature-brief.md.
 Use the spdd-reasons-canvas skill on @spdd/analysis/ANALYSIS-001.md.
 Use the spdd-generate skill on @spdd/prompt/PROMPT-001.md.
 ```
+
+```text [Claude Code]
+/specark:spdd-analysis @requirements/feature-brief.md
+/specark:spdd-reasons-canvas @spdd/analysis/ANALYSIS-001.md
+/specark:spdd-generate @spdd/prompt/PROMPT-001.md
+```
+
+:::
 
 ::: tip Good signal
 - The next artifact appears in the repository.
@@ -109,9 +124,17 @@ Check:
 
 Once you have a prompt artifact under `spdd/prompt/`, run:
 
-```text
+::: code-group
+
+```text [Codex]
 Use the spdd-generate skill on @spdd/prompt/PROMPT-001.md.
 ```
+
+```text [Claude Code]
+/specark:spdd-generate @spdd/prompt/PROMPT-001.md
+```
+
+:::
 
 ::: tip Good signal
 - Implementation files change in the repository.
@@ -121,23 +144,9 @@ Use the spdd-generate skill on @spdd/prompt/PROMPT-001.md.
 
 ## Step 6: Add a release-ready checkpoint
 
-Use lightweight git discipline so the first feature feels safe:
-
-- create a branch before major implementation work
-- commit after a clean prompt artifact is ready if you want a stable design checkpoint
-- commit again after implementation and verification pass
-
-::: code-group
-
-```bash [Codex]
-git switch -c codex/first-feature
+```bash
+git switch -c feature/first-feature
 ```
-
-```bash [Claude Code]
-git switch -c claude/first-feature
-```
-
-:::
 
 ::: info Worktrees (optional)
 If you want to compare two alternative prompt or implementation paths, a worktree is useful. It keeps the main branch clean while you explore A/B variants in parallel.

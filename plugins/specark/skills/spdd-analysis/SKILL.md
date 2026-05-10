@@ -1,6 +1,7 @@
 ---
 name: spdd-analysis
 description: Analyze business requirements against codebase context at a strategic level and produce enriched context for REASONS Canvas generation, following the canonical repository command text via the integrated reference file.
+disable-model-invocation: true
 ---
 
 # spdd-analysis

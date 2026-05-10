@@ -1,6 +1,7 @@
 ---
 name: spdd-api-test
 description: Generate API test assets from SPDD stories, prompts, and implemented behavior using the canonical repository command text integrated into this project.
+disable-model-invocation: true
 ---
 
 # spdd-api-test

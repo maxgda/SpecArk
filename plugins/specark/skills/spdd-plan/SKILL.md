@@ -1,6 +1,7 @@
 ---
 name: spdd-plan
 description: Turn broad or noisy product direction into a reviewable SPDD planning artifact with ordered delivery slices before story generation begins.
+disable-model-invocation: true
 ---
 
 # spdd-plan

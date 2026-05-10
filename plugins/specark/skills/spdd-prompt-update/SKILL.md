@@ -1,6 +1,7 @@
 ---
 name: spdd-prompt-update
 description: Update an existing SPDD prompt file with new requirements or architectural changes while preserving the REASONS Canvas structure, following the canonical repository command text integrated into this project.
+disable-model-invocation: true
 ---
 
 # spdd-prompt-update

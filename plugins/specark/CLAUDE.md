@@ -1,84 +1,34 @@
-# SpecArk — Claude Code Plugin
+# SpecArk Plugin — Reference Overview
 
-SpecArk brings Structured Prompt-Driven Development (SPDD) to Claude Code. It turns broad feature requests into artifact-driven workflows with explicit handoffs between phases.
+This file is a human-readable overview of the SpecArk plugin. For installation, use the Claude Code marketplace (see `../.claude-plugin/marketplace.json`).
 
 ## Skills
 
-All skills live under `plugins/specark/skills/`. Each skill has a `SKILL.md` that is the executable contract.
-
-| Skill | Purpose |
-|---|---|
-| `spdd-orchestrator` | Coordinate the full workflow across phases with manual, semi-auto, auto, resume, and plan-only modes |
-| `spdd-plan` | Turn broad product direction into ordered delivery slices before story generation |
-| `spdd-story` | Decompose a broad requirement into INVEST-compliant, implementation-sized stories |
-| `spdd-analysis` | Analyze a story against codebase context at a strategic level |
-| `spdd-reasons-canvas` | Generate the implementation-ready REASONS Canvas prompt |
-| `spdd-generate` | Implement code from the structured prompt |
-| `spdd-prompt-update` | Update an existing prompt after requirement or design changes |
-| `spdd-sync` | Sync implementation reality back into the prompt |
-| `spdd-api-test` | Generate or refresh API-oriented verification assets |
-
-## Skill files
-
-```
-plugins/specark/skills/
-  spdd-orchestrator/SKILL.md
-  spdd-plan/SKILL.md
-  spdd-story/SKILL.md
-  spdd-analysis/SKILL.md
-  spdd-reasons-canvas/SKILL.md
-  spdd-generate/SKILL.md
-  spdd-prompt-update/SKILL.md
-  spdd-sync/SKILL.md
-  spdd-api-test/SKILL.md
-```
-
-## Invocation
-
-Use skills explicitly by naming them in your request:
-
-```text
-Use the spdd-orchestrator skill on @idea.md in semi-auto mode.
-Use the spdd-story skill on @requirements/brief.md.
-Use the spdd-analysis skill on @requirements/STORY-001.md.
-Use the spdd-reasons-canvas skill on @spdd/analysis/ANALYSIS-001.md.
-Use the spdd-generate skill on @spdd/prompt/PROMPT-001.md.
-```
+| Skill | Invocation | Purpose |
+|---|---|---|
+| `spdd-orchestrator` | `/specark:spdd-orchestrator` | Coordinate the full workflow across phases |
+| `spdd-plan` | `/specark:spdd-plan` | Turn broad product direction into delivery slices |
+| `spdd-story` | `/specark:spdd-story` | Decompose a requirement into INVEST-compliant stories |
+| `spdd-analysis` | `/specark:spdd-analysis` | Analyze a story against codebase context |
+| `spdd-reasons-canvas` | `/specark:spdd-reasons-canvas` | Generate the REASONS Canvas implementation prompt |
+| `spdd-generate` | `/specark:spdd-generate` | Implement code from the structured prompt |
+| `spdd-prompt-update` | `/specark:spdd-prompt-update` | Update a prompt after requirement changes |
+| `spdd-sync` | `/specark:spdd-sync` | Sync implementation reality back into the prompt |
+| `spdd-api-test` | `/specark:spdd-api-test` | Generate API-oriented verification assets |
 
 ## Normal workflow sequence
 
 ```
-0. spdd-plan       (optional — for roadmap-sized input)
-1. spdd-story      → requirements/STORY-NNN.md
-2. spdd-analysis   → spdd/analysis/ANALYSIS-NNN.md
-3. spdd-reasons-canvas → spdd/prompt/PROMPT-NNN.md
-4. spdd-generate   → implementation files
-5. spdd-api-test   → spdd/tests/ (optional)
+0. /specark:spdd-plan       (optional — for roadmap-sized input)
+1. /specark:spdd-story      → requirements/STORY-NNN.md
+2. /specark:spdd-analysis   → spdd/analysis/ANALYSIS-NNN.md
+3. /specark:spdd-reasons-canvas → spdd/prompt/PROMPT-NNN.md
+4. /specark:spdd-generate   → implementation files
+5. /specark:spdd-api-test   → spdd/tests/ (optional)
 ```
 
 ## Supporting references
 
-All canonical workflow text lives in `plugins/specark/references/source-commands/`. Skills reference these files directly — do not summarize or skip them.
-
-- `references/source-commands/spdd-story.md`
-- `references/source-commands/spdd-analysis.md`
-- `references/source-commands/spdd-reasons-canvas.md`
-- `references/source-commands/spdd-generate.md`
-- `references/source-commands/spdd-prompt-update.md`
-- `references/source-commands/spdd-sync.md`
-- `references/source-commands/spdd-api-test.md`
-- `references/orchestrator-contract.md`
-
-## Helper scripts
-
-```
-plugins/specark/scripts/
-  derive_spdd_filename.py      — generate SPDD-compliant artifact filenames
-  next_story_number.py         — determine next story sequence number
-  parse_reasons_sections.py    — parse REASONS Canvas sections
-  discover_requirement_files.py — discover requirement markdown files
-```
-
-## Installation
-
-See [docs/installation-claude-code.md](../../docs/installation-claude-code.md) for step-by-step setup.
+- `references/source-commands/` — canonical workflow text for each phase skill
+- `references/orchestrator-contract.md` — shared phase result block format
+- `scripts/` — helper utilities for filename derivation and artifact discovery

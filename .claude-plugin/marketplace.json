@@ -1,0 +1,17 @@
+{
+  "name": "specark",
+  "owner": {
+    "name": "maxgda"
+  },
+  "plugins": [
+    {
+      "name": "specark",
+      "source": "./plugins/specark",
+      "description": "Structured Prompt-Driven Development workflow for Claude Code.",
+      "version": "0.1.0",
+      "category": "engineering",
+      "repository": "https://github.com/maxgda/SpecArk",
+      "keywords": ["spdd", "requirements", "prompt-driven-development", "reasons-canvas"]
+    }
+  ]
+}
