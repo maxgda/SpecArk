@@ -1,6 +1,6 @@
 ---
 name: spdd-story
-description: Decompose high-level feature requirements into INVEST-compliant, business-focused stories with clear scope boundaries and testable acceptance criteria. This Codex skill follows the canonical repository command text via the integrated reference file.
+description: Decompose high-level feature requirements into INVEST-compliant, business-focused stories with clear scope boundaries and testable acceptance criteria, following the canonical repository command text via the integrated reference file.
 ---
 
 # spdd-story

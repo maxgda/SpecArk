@@ -1,6 +1,6 @@
 # Getting Started
 
-SpecArk is a Codex plugin bundle for Structured Prompt-Driven Development. This page is the fastest path to a first successful run if you are using the plugin for the first time.
+SpecArk is a plugin bundle for Structured Prompt-Driven Development that works with both **Codex** and **Claude Code**. This page is the fastest path to a first successful run.
 
 ## Before you start
 
@@ -13,16 +13,27 @@ You are in the right place if you want:
 
 If you only need installation details or local docs commands, jump to [Installation](/installation).
 
-## Step 1: Install with the two-command startup
+## Step 1: Install
 
-```bash
+::: code-group
+
+```bash [Codex]
 codex plugin marketplace add <owner>/<repo>
 codex plugin marketplace upgrade
 ```
 
+```bash [Claude Code]
+git submodule add https://github.com/maxgda/SpecArk.git plugins/specark-plugin
+# Then add to your CLAUDE.md:
+# @plugins/specark-plugin/plugins/specark/CLAUDE.md
+```
+
+:::
+
+See [Claude Code Installation](/installation-claude-code) for all options and verification steps.
+
 ::: tip After install
-- The plugin is available in Codex.
-- You can reference `spdd-*` skills in a request.
+- The `spdd-*` skills are available in your session.
 - You are ready to give the workflow a real input artifact.
 :::
 
@@ -30,9 +41,17 @@ codex plugin marketplace upgrade
 
 Most first-time users should start with the orchestrator:
 
-```text
+::: code-group
+
+```text [Codex]
 Use the spdd-orchestrator skill on @idea-of-the-enhancement.md in semi-auto mode.
 ```
+
+```text [Claude Code]
+Use the spdd-orchestrator skill on @idea-of-the-enhancement.md in semi-auto mode.
+```
+
+:::
 
 Use a manual phase only when you already have the matching artifact:
 

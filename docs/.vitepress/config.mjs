@@ -54,7 +54,7 @@ const workflowSidebar = [
 
 export default {
   title: "SpecArk",
-  description: "Developer documentation for the SpecArk Codex plugin and SPDD workflow",
+  description: "Developer documentation for the SpecArk SPDD plugin — supports Codex and Claude Code",
   base: "/SpecArk/",
   cleanUrls: true,
   lastUpdated: true,
@@ -80,7 +80,8 @@ export default {
             { text: "What Is SpecArk?", link: "/" },
             { text: "Getting Started", link: "/getting-started" },
             { text: "First Feature Tutorial", link: "/first-feature" },
-            { text: "Installation", link: "/installation" },
+            { text: "Installation — Codex", link: "/installation" },
+            { text: "Installation — Claude Code", link: "/installation-claude-code" },
             { text: "Plugin Layout", link: "/plugin-layout" },
             { text: "Limitations", link: "/limitations" },
             { text: "Next Steps", link: "/next-steps" },
@@ -113,7 +114,7 @@ export default {
       ]
     },
     footer: {
-      message: "Structured Prompt-Driven Development for Codex plugin workflows.",
+      message: "Structured Prompt-Driven Development — works with Codex and Claude Code.",
       copyright: "SpecArk"
     },
     outline: {

@@ -28,13 +28,23 @@ Step 7: Review and hand off
 
 ## Step 1: Install the plugin
 
-```bash
+::: code-group
+
+```bash [Codex]
 codex plugin marketplace add <owner>/<repo>
 codex plugin marketplace upgrade
 ```
 
+```bash [Claude Code]
+git submodule add https://github.com/maxgda/SpecArk.git plugins/specark-plugin
+# Add to your CLAUDE.md:
+# @plugins/specark-plugin/plugins/specark/CLAUDE.md
+```
+
+:::
+
 ::: tip After install
-- Codex can access the `spdd-*` skills.
+- The `spdd-*` skills are available in your session.
 - You are ready to start from a real repository artifact.
 :::
 
@@ -117,9 +127,17 @@ Use lightweight git discipline so the first feature feels safe:
 - commit after a clean prompt artifact is ready if you want a stable design checkpoint
 - commit again after implementation and verification pass
 
-```bash
+::: code-group
+
+```bash [Codex]
 git switch -c codex/first-feature
 ```
+
+```bash [Claude Code]
+git switch -c claude/first-feature
+```
+
+:::
 
 ::: info Worktrees (optional)
 If you want to compare two alternative prompt or implementation paths, a worktree is useful. It keeps the main branch clean while you explore A/B variants in parallel.

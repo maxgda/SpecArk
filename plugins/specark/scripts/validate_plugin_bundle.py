@@ -188,6 +188,26 @@ def validate_skill(skill_name: str) -> None:
         fail(f"openai.yaml default_prompt missing for {skill_name}")
 
 
+def validate_claude_md() -> None:
+    claude_md = PLUGIN_ROOT / "CLAUDE.md"
+    if not claude_md.exists():
+        fail(f"missing Claude Code entry point: {claude_md}")
+    text = claude_md.read_text()
+    for skill in REQUIRED_SKILLS:
+        if skill not in text:
+            fail(f"CLAUDE.md must list skill: {skill}")
+
+
+def validate_skill_descriptions_platform_neutral() -> None:
+    for skill_name in REQUIRED_SKILLS:
+        skill_md = SKILLS_ROOT / skill_name / "SKILL.md"
+        if not skill_md.exists():
+            continue
+        text = skill_md.read_text()
+        if "This Codex skill" in text or "This Codex plugin" in text:
+            fail(f"platform-specific 'Codex' wording found in description of {skill_md}")
+
+
 def validate_plan_naming_support() -> None:
     script = (PLUGIN_ROOT / "scripts" / "derive_spdd_filename.py").read_text()
     if '"plan"' not in script:
@@ -204,7 +224,9 @@ def main() -> None:
     for skill_name in REQUIRED_SKILLS:
         validate_skill(skill_name)
     validate_plan_naming_support()
-    print("OK: plugin manifest, marketplace, canonical sources, and skills validated")
+    validate_claude_md()
+    validate_skill_descriptions_platform_neutral()
+    print("OK: plugin manifest, marketplace, canonical sources, skills, and Claude Code entry point validated")
 
 
 if __name__ == "__main__":

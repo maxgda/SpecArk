@@ -4,7 +4,7 @@ layout: home
 hero:
   name: "SpecArk"
   text: "Structured Prompt-Driven Development"
-  tagline: "A Git-distributed Codex plugin that turns SPDD into an explicit, artifact-driven workflow — from idea to implementation."
+  tagline: "A Git-distributed plugin that turns SPDD into an explicit, artifact-driven workflow — from idea to implementation."
   actions:
     - theme: brand
       text: Get Started →
@@ -13,8 +13,8 @@ hero:
       text: First Feature Tutorial
       link: /first-feature
     - theme: alt
-      text: Workflow Reference
-      link: /workflow/
+      text: View on GitHub
+      link: https://github.com/maxgda/SpecArk
 
 features:
   - icon: 📄
@@ -36,6 +36,44 @@ features:
     title: Full traceability
     details: Every phase leaves a reviewable artifact. Go from idea to code with a clear audit trail in your repository.
 ---
+
+<div class="platform-compat">
+  <span class="compat-label">Works with</span>
+  <a href="/installation" class="compat-badge compat-codex">
+    <img src="/codex-logo.svg" alt="Codex" height="28" />
+  </a>
+  <a href="/installation-claude-code" class="compat-badge compat-claude">
+    <img src="/claude-logo.svg" alt="Claude Code" height="28" />
+  </a>
+</div>
+
+<style>
+.platform-compat {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  justify-content: center;
+  padding: 24px 0 8px;
+  flex-wrap: wrap;
+}
+.compat-label {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--vp-c-text-2);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+.compat-badge {
+  display: inline-flex;
+  align-items: center;
+  text-decoration: none;
+  border-radius: 6px;
+  transition: opacity 0.15s;
+}
+.compat-badge:hover {
+  opacity: 0.8;
+}
+</style>
 
 ## Start here if you are new
 
@@ -63,7 +101,7 @@ Each phase produces a repository file. The next phase reads that file directly �
 
 Use this documentation when you need to:
 
-- install the plugin into Codex from a Git-backed marketplace
+- install the plugin into Codex or Claude Code from a Git-backed source
 - choose the right SPDD phase for the artifact you already have
 - understand how handoff artifacts move from story to analysis to prompt to implementation
 - keep token usage low while still preserving reviewable workflow checkpoints

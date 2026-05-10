@@ -1,6 +1,6 @@
 ---
 name: spdd-analysis
-description: Analyze business requirements against codebase context at a strategic level and produce enriched context for REASONS Canvas generation. This Codex skill follows the canonical repository command text via the integrated reference file.
+description: Analyze business requirements against codebase context at a strategic level and produce enriched context for REASONS Canvas generation, following the canonical repository command text via the integrated reference file.
 ---
 
 # spdd-analysis
