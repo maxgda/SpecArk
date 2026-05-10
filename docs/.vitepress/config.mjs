@@ -60,6 +60,7 @@ export default {
     },
     nav: [
       { text: "Guide", link: "/getting-started" },
+      { text: "First Feature", link: "/first-feature" },
       { text: "Workflow", link: "/workflow/" },
       { text: "Skills", link: "/skills/" },
       { text: "References", link: "/references/" }
@@ -74,6 +75,7 @@ export default {
           items: [
             { text: "What Is SpecArk?", link: "/" },
             { text: "Getting Started", link: "/getting-started" },
+            { text: "First Feature Tutorial", link: "/first-feature" },
             { text: "Installation", link: "/installation" },
             { text: "Plugin Layout", link: "/plugin-layout" },
             { text: "Limitations", link: "/limitations" },

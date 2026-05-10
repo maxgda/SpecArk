@@ -37,13 +37,3 @@ temp/
 docs/.vitepress/cache/
 docs/.vitepress/dist/
 
-# Local generated SPDD artifacts in consuming projects
-requirements/
-spdd/analysis/
-spdd/prompt/
-spdd/context/
-spdd/tests/
-
-# Optional plugin assets generated later
-plugins/spdd/assets/
-plugins/specark/assets/

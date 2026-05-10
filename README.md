@@ -2,9 +2,34 @@
 
 Structured Prompt-Driven Development for Codex, packaged as a Git-distributed plugin bundle.
 
-SpecArk turns SPDD into an explicit, artifact-driven workflow instead of a loose series of prompts. You move from planning or requirement shaping to analysis to implementation by handing files from one phase to the next.
+SpecArk turns SPDD into an explicit, artifact-driven workflow instead of a loose series of prompts. It helps you move from an idea or requirement to analysis, prompt generation, implementation, and optional verification by handing repository files from one phase to the next.
 
-> Based on Martin Fowler's article, [Structured Prompt-Driven Development (SPDD)](https://martinfowler.com/articles/structured-prompt-driven/).
+Use it when your repository needs a repeatable path from broad request to implementation without re-pasting the same context at every step.
+
+## Start Here
+
+### Two-command startup
+
+```bash
+codex plugin marketplace add <owner>/<repo>
+codex plugin marketplace upgrade
+```
+
+### First real run
+
+If you are starting from a broad idea and want the default path:
+
+```text
+Use the spdd-orchestrator skill on @idea-of-the-enhancement.md in semi-auto mode.
+```
+
+If you already know the exact artifact you have, jump to the matching phase:
+
+```text
+Use the spdd-analysis skill on @requirements/STORY-001.md.
+Use the spdd-reasons-canvas skill on @spdd/analysis/ANALYSIS-001.md.
+Use the spdd-generate skill on @spdd/prompt/PROMPT-001.md.
+```
 
 ## Why SpecArk
 
@@ -12,62 +37,17 @@ SpecArk turns SPDD into an explicit, artifact-driven workflow instead of a loose
 - file-backed handoffs between workflow phases
 - narrower prompts and lower token burn
 - clean recovery paths when requirements or code drift
-- optional orchestrator for end-to-end coordination
+- an optional orchestrator when you want one command surface
 
-## Quick Start
+## Use SpecArk When
 
-### 1. Install
+- you want a repeatable path from idea to implementation
+- you prefer repository files over re-pasting the same context in chat
+- you need prompt updates after requirement changes
+- you need prompt sync after refactors or implementation drift
+- you want clear phase boundaries instead of free-form prompting
 
-For a GitHub-backed marketplace install:
-
-```bash
-codex plugin marketplace add <owner>/<repo>
-codex plugin marketplace upgrade
-```
-
-For local plugin development:
-
-1. Keep the plugin at `plugins/specark/`.
-2. Keep the marketplace file at `.agents/plugins/marketplace.json`.
-3. Restart Codex after changing skills, references, or plugin metadata.
-
-### 2. Validate the bundle
-
-```bash
-python3 plugins/specark/scripts/validate_plugin_bundle.py
-```
-
-This checks the plugin manifest, marketplace file, canonical command references, skill wrappers, and `agents/openai.yaml` files.
-
-### 3. Run the docs locally
-
-```bash
-npm install
-npm run docs:dev
-```
-
-Other useful commands:
-
-```bash
-npm run docs:build
-npm run docs:preview
-```
-
-## Repository Layout
-
-```text
-.agents/plugins/marketplace.json
-plugins/specark/
-  .codex-plugin/plugin.json
-  references/
-  scripts/
-  skills/
-docs/
-README.md
-CHANGELOG.md
-```
-
-## How To Run The Workflow
+## What Happens Next
 
 The normal SPDD flow is:
 
@@ -77,21 +57,6 @@ The normal SPDD flow is:
 3. `spdd-reasons-canvas`
 4. `spdd-generate`
 5. `spdd-api-test` when API verification assets are needed
-
-If you want one command surface, start with the orchestrator:
-
-```text
-Use the spdd-orchestrator skill on @idea-of-the-enhancement.md in semi-auto mode.
-```
-
-If you want to run phases manually:
-
-```text
-Use the spdd-story skill on @idea-of-the-enhancement.md.
-Use the spdd-analysis skill on @requirements/STORY-001.md.
-Use the spdd-reasons-canvas skill on @spdd/analysis/ANALYSIS-001.md.
-Use the spdd-generate skill on @spdd/prompt/PROMPT-001.md.
-```
 
 Expected project-local artifact folders:
 
@@ -103,20 +68,20 @@ Expected project-local artifact folders:
 
 These artifacts belong to the consuming project, not the plugin itself.
 
-## How To Save Tokens
+## First 10 Minutes
 
-The cheapest SPDD workflow is the one that keeps every step narrow and artifact-driven.
+1. Install with the two marketplace commands above.
+2. Run the orchestrator if you are starting broad, or jump straight to the phase that matches your current artifact.
+3. Review the produced artifact before moving forward to the next phase.
+4. Continue into the implementation prompt and generated code.
 
-### Recommended habits
+For a guided walkthrough, start with [Getting Started](docs/getting-started.md) and then use the [First Feature Tutorial](docs/first-feature.md).
 
-- Use file inputs instead of pasting long requirements into chat.
-- Pass one artifact to the next phase instead of restating the same context.
-- Split large requirements with `spdd-story` before analysis.
-- Use `spdd-prompt-update` for requirement changes instead of regenerating from scratch.
-- Use `spdd-sync` when implementation drift happened and the prompt needs to catch up.
-- Keep each Codex request single-purpose.
+## Keep Token Usage Low
 
-### Low-token pattern
+The cheapest SPDD workflow is the one that keeps every request narrow and artifact-driven.
+
+### Recommended pattern
 
 ```text
 Use the spdd-story skill on @idea.md.
@@ -125,7 +90,7 @@ Use the spdd-reasons-canvas skill on @spdd/analysis/ANALYSIS-001.md.
 Use the spdd-generate skill on @spdd/prompt/PROMPT-001.md.
 ```
 
-### High-token anti-pattern
+### Anti-pattern
 
 ```text
 Here is the full requirement again...
@@ -134,25 +99,33 @@ Here is the analysis again...
 Now generate everything end to end and also update tests.
 ```
 
-## How To Generate Tests
+## Local Development And Docs
 
-Use `spdd-api-test` when the change affects API behavior or when you want reusable verification artifacts after implementation.
+For local plugin work:
 
-Example:
+1. Keep the plugin at `plugins/specark/`.
+2. Keep the marketplace file at `.agents/plugins/marketplace.json`.
+3. Restart Codex after changing skills, references, or plugin metadata.
 
-```text
-Use the spdd-api-test skill on @spdd/prompt/PROMPT-001.md.
+Validate the bundle:
+
+```bash
+python3 plugins/specark/scripts/validate_plugin_bundle.py
 ```
 
-Best times to run it:
+Run the docs site locally:
 
-- after `spdd-generate` for a new API feature
-- after updating an existing prompt with `spdd-prompt-update`
-- after syncing prompt drift with `spdd-sync` when API behavior changed
+```bash
+npm install
+npm run docs:dev
+```
 
-Typical output target:
+Other useful docs commands:
 
-- `spdd/tests/`
+```bash
+npm run docs:build
+npm run docs:preview
+```
 
 ## Included Skills
 
@@ -183,6 +156,7 @@ Provenance metadata lives in `plugins/specark/references/source-commands/SOURCES
 ## Read More
 
 - [Getting Started](docs/getting-started.md)
+- [First Feature Tutorial](docs/first-feature.md)
 - [Installation](docs/installation.md)
 - [Workflow Overview](docs/workflow/index.md)
 - [Skill Index](docs/skills/index.md)

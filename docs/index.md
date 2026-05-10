@@ -4,60 +4,51 @@ layout: home
 hero:
   name: "SpecArk"
   text: "Structured Prompt-Driven Development for Codex"
-  tagline: "A Git-distributed Codex plugin that turns SPDD into an explicit, file-driven workflow for story creation, analysis, prompt generation, implementation, sync, and API verification."
+  tagline: "A Git-distributed Codex plugin that turns SPDD into an explicit, file-driven workflow from idea to implementation."
   actions:
     - theme: brand
       text: Get Started
       link: /getting-started
     - theme: alt
-      text: Browse Skills
-      link: /skills/
+      text: Build Your First Feature
+      link: /first-feature
     - theme: alt
-      text: Understand the Workflow
+      text: Workflow Reference
       link: /workflow/
 
 features:
+  - title: Start with one artifact
+    details: Use a real repository file as the input, then hand artifacts from one phase to the next instead of re-pasting the same context.
   - title: Explicit workflow control
-    details: Use one orchestrator to route across story, analysis, prompt, generation, sync, and API-test phases without losing file-backed handoffs.
-  - title: Lean phase skills
-    details: Each SPDD phase skill stays narrow and contract-focused while canonical source commands remain preserved under plugin references.
-  - title: Artifact-driven delivery
-    details: Requirements, analyses, prompts, and test assets move forward as repository files instead of repeated pasted context.
-  - title: Lower token waste
-    details: Narrow inputs, phase-by-phase handoffs, and prompt maintenance flows reduce repeated context and keep requests cheaper.
+    details: Use the orchestrator for guided routing or invoke a single `spdd-*` phase directly when you already have the right artifact.
+  - title: Low-token delivery
+    details: Narrow requests and file-backed handoffs keep prompts smaller, reviews clearer, and iteration cheaper.
+  - title: First-user to ship path
+    details: Move from install to a first successful feature with guided onboarding, a tutorial path, and clear phase handoffs.
 ---
+
+## Start here if you are new
+
+SpecArk is built for teams and repositories that want a disciplined SPDD workflow instead of loose prompt chains. If you are evaluating the plugin for the first time, start with:
+
+1. [Getting Started](/getting-started)
+2. [First Feature Tutorial](/first-feature)
+3. [Workflow Overview](/workflow/)
 
 ## What this site covers
 
-This documentation explains how the SpecArk plugin is structured, how each `spdd-*` skill fits into the SPDD lifecycle, and how to install, operate, and extend the plugin safely.
-
-Use this site when you need to:
+Use this documentation when you need to:
 
 - install the plugin into Codex from a Git-backed marketplace
-- run the docs site locally during plugin development
-- understand which skill to invoke for a given stage of delivery
-- keep token usage under control while moving phase to phase
-- use the orchestrator without drifting from the defined workflow
-- maintain or expand the plugin itself
-
-## Core model
-
-SpecArk packages Structured Prompt-Driven Development into a Codex plugin with explicit invocation semantics. The skills are not meant to behave like vague assistants. They behave more like disciplined commands with clear input artifacts, output artifacts, and handoff contracts.
-
-The workflow is organized around these concepts:
-
-- large ideas can be split into implementation-sized stories
-- focused requirements can be analyzed into strategic context
-- strategic context can be turned into a REASONS Canvas prompt
-- prompts can drive implementation and downstream verification assets
-- changes can flow back into prompts when requirements or code drift
+- choose the right SPDD phase for the artifact you already have
+- understand how handoff artifacts move from story to analysis to prompt to implementation
+- keep token usage low while still preserving reviewable workflow checkpoints
+- maintain or extend the plugin after the first-user path is already clear
 
 ## Read next
 
 - Start with [Getting Started](/getting-started).
-- Review [Limitations](/limitations) before broadening the workflow.
-- Check [Next Steps](/next-steps) for release polish tasks.
-- Use [Release Notes](/release-notes) for release preparation and summary structure.
-- Use [Maintainer Notes](/maintainer-notes) when extending the plugin.
+- Continue with the [First Feature Tutorial](/first-feature).
 - Review the [Workflow Overview](/workflow/).
 - Browse the [Skill Index](/skills/).
+- Use [Maintainer Notes](/maintainer-notes) only when you are extending the plugin itself.
