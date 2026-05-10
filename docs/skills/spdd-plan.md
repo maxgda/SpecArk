@@ -2,6 +2,12 @@
 
 `spdd-plan` is an explicit pre-story planning skill for broad initiatives, noisy PRDs, and mixed business context that still needs roadmap slicing before story generation.
 
+## Quick start
+
+```text
+Use the spdd-plan skill on @roadmap-brief.md.
+```
+
 ## Use it when
 
 - the input spans multiple capabilities, dependency chains, or rollout phases
@@ -11,19 +17,27 @@
 
 ## Do not use it when
 
-- the request is already a coherent implementation story for `spdd-story`
-- the requirement is already focused enough for `spdd-analysis`
-- the capability already exists and the right move is reuse instead of replanning
+::: warning Skip spdd-plan if
+- The request is already a coherent implementation story — use `spdd-story` directly.
+- The requirement is already focused enough for `spdd-analysis`.
+- The capability already exists and the right move is reuse instead of replanning.
+:::
 
-## Output shape
+## Output
 
-This skill should typically produce:
+This skill produces:
 
-- one planning artifact under `spdd/plan/`
+- a planning artifact under `spdd/plan/`
 - ordered delivery slices with dependency notes and sequencing rationale
 - exactly one recommended next slice for `spdd-story`
-- a completion block that reports the consumed inputs, produced plan path, next command shape, and any material validation notes
+- a completion block that reports consumed inputs, the produced plan path, the next command shape, and any material validation notes
 
-## Notes
+## Where it fits
 
-`spdd-plan` is explicitly invoked and optional. It exists before `spdd-story`, but it does not replace `spdd-story` or alter the orchestrator's current automatic start-phase detection.
+```
+spdd-plan → spdd-story → spdd-analysis → spdd-reasons-canvas → spdd-generate
+```
+
+::: info Relationship to the orchestrator
+`spdd-plan` is explicitly invoked and optional. It exists before `spdd-story` in the conceptual sequence, but it does not replace `spdd-story` or alter the orchestrator's current automatic start-phase detection.
+:::

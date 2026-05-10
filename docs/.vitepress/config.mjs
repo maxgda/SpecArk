@@ -4,6 +4,10 @@ const skills = [
     link: "/skills/spdd-orchestrator"
   },
   {
+    text: "spdd-plan",
+    link: "/skills/spdd-plan"
+  },
+  {
     text: "spdd-story",
     link: "/skills/spdd-story"
   },
@@ -91,6 +95,7 @@ export default {
         },
         {
           text: "Skills",
+          collapsed: false,
           items: [
             { text: "Skill Index", link: "/skills/" },
             ...skills

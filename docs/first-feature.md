@@ -2,15 +2,29 @@
 
 This tutorial walks through a first feature from install to release handoff using SpecArk's artifact-driven workflow. The goal is not to teach every edge case. The goal is to get you through one complete path with confidence.
 
-## Outcome
+## What you will end up with
 
-By the end of this tutorial you should have:
+::: info Outcome
+By the end of this tutorial you will have:
 
 - the plugin installed
 - a real input artifact in your repository
 - one or more SPDD handoff artifacts created in sequence
 - generated implementation changes
 - a clean release handoff with sensible git checkpoints
+:::
+
+## The full path at a glance
+
+```
+Step 1: Install
+Step 2: Create a starting artifact (idea.md or feature-brief.md)
+Step 3: Run the orchestrator or jump to the matching phase
+Step 4: Review each phase result block before continuing
+Step 5: Generate the implementation
+Step 6: Add a git checkpoint
+Step 7: Review and hand off
+```
 
 ## Step 1: Install the plugin
 
@@ -19,10 +33,10 @@ codex plugin marketplace add <owner>/<repo>
 codex plugin marketplace upgrade
 ```
 
-Expected outcome:
-
-- Codex can access the `spdd-*` skills
-- you are ready to start from a real repository artifact
+::: tip After install
+- Codex can access the `spdd-*` skills.
+- You are ready to start from a real repository artifact.
+:::
 
 ## Step 2: Create a lightweight starting artifact
 
@@ -34,10 +48,10 @@ Examples:
 - `requirements/feature-brief.md` for a focused requirement
 - an existing story file if one already exists
 
-Expected outcome:
-
-- you have one clear artifact to hand to the first phase
-- the request is small enough to review phase by phase
+::: tip Good signal
+- You have one clear artifact to hand to the first phase.
+- The request is small enough to review phase by phase.
+:::
 
 ## Step 3: Start from the smallest valid phase
 
@@ -55,17 +69,17 @@ Use the spdd-reasons-canvas skill on @spdd/analysis/ANALYSIS-001.md.
 Use the spdd-generate skill on @spdd/prompt/PROMPT-001.md.
 ```
 
-Expected outcome:
-
-- the next artifact appears in the repository
-- the request stays narrow and phase-specific
+::: tip Good signal
+- The next artifact appears in the repository.
+- The request stays narrow and phase-specific.
+:::
 
 ## Step 4: Review each handoff before moving on
 
 The normal sequence is:
 
-```text
-spdd-story -> spdd-analysis -> spdd-reasons-canvas -> spdd-generate
+```
+spdd-story → spdd-analysis → spdd-reasons-canvas → spdd-generate
 ```
 
 After each phase, look for the `SPDD_PHASE_RESULT` block and the new file path it reports.
@@ -76,10 +90,10 @@ Check:
 - the output file exists where the result block says it does
 - the summary matches the feature you are trying to ship
 
-Expected outcome:
-
-- you catch requirement drift early
-- you preserve traceability from idea to implementation
+::: tip Good signal
+- You catch requirement drift early.
+- You preserve traceability from idea to implementation.
+:::
 
 ## Step 5: Generate the implementation
 
@@ -89,11 +103,11 @@ Once you have a prompt artifact under `spdd/prompt/`, run:
 Use the spdd-generate skill on @spdd/prompt/PROMPT-001.md.
 ```
 
-Expected outcome:
-
-- implementation files change in the repository
-- the generated code reflects the operations defined in the prompt
-- you can now review code and run verification
+::: tip Good signal
+- Implementation files change in the repository.
+- The generated code reflects the operations defined in the prompt.
+- You can now review code and run verification.
+:::
 
 ## Step 6: Add a release-ready checkpoint
 
@@ -103,18 +117,18 @@ Use lightweight git discipline so the first feature feels safe:
 - commit after a clean prompt artifact is ready if you want a stable design checkpoint
 - commit again after implementation and verification pass
 
-Example:
-
 ```bash
 git switch -c codex/first-feature
 ```
 
+::: info Worktrees (optional)
 If you want to compare two alternative prompt or implementation paths, a worktree is useful. It keeps the main branch clean while you explore A/B variants in parallel.
+:::
 
-Expected outcome:
-
-- you can recover cleanly if one variant goes wrong
-- design and implementation checkpoints stay easy to review
+::: tip Good signal
+- You can recover cleanly if one variant goes wrong.
+- Design and implementation checkpoints stay easy to review.
+:::
 
 ## Step 7: Finish the handoff
 
@@ -124,19 +138,22 @@ Once the generated code and any required verification look correct:
 - run the relevant tests or validation commands for the consuming project
 - prepare the normal repository handoff, such as a commit or pull request
 
-If the issue is in the implementation contract itself, fix the prompt first and then regenerate the affected code instead of patching blindly.
+::: warning Prompt-first rule
+If there is a mistake in the implementation, check whether it came from the prompt first. Fix the prompt and then regenerate the affected code instead of patching the output directly. Patching generated code without updating the prompt creates drift.
+:::
 
-Expected outcome:
-
-- the feature is ready for normal team review
-- the prompt and implementation stay in sync
+::: tip Done
+- The feature is ready for normal team review.
+- The prompt and implementation stay in sync.
+:::
 
 ## Common pitfalls
 
-- jumping into `spdd-generate` with only an idea or analysis file
-- editing generated code for prompt-contract mistakes without updating the prompt
-- treating worktrees as mandatory instead of optional
-- overexplaining git steps until the tutorial stops being about shipping the feature
+::: warning Avoid these
+- Jumping into `spdd-generate` with only an idea or analysis file — you need a prompt artifact first.
+- Editing generated code for prompt-contract mistakes without updating the prompt first.
+- Treating worktrees as mandatory instead of optional.
+:::
 
 ## Read next
 

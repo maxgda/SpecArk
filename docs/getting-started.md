@@ -20,11 +20,11 @@ codex plugin marketplace add <owner>/<repo>
 codex plugin marketplace upgrade
 ```
 
-What good looks like:
-
-- the plugin is available in Codex
-- you can reference `spdd-*` skills in a request
-- you are ready to give the workflow a real input artifact
+::: tip After install
+- The plugin is available in Codex.
+- You can reference `spdd-*` skills in a request.
+- You are ready to give the workflow a real input artifact.
+:::
 
 ## Step 2: Pick the right first command
 
@@ -36,55 +36,48 @@ Use the spdd-orchestrator skill on @idea-of-the-enhancement.md in semi-auto mode
 
 Use a manual phase only when you already have the matching artifact:
 
-- Broad idea: start with `spdd-story`
-- Existing story or focused requirement: start with `spdd-analysis`
-- Existing analysis artifact in `spdd/analysis/`: start with `spdd-reasons-canvas`
-- Existing prompt artifact in `spdd/prompt/`: start with `spdd-generate`
+| Your artifact | Start phase |
+|---|---|
+| Broad idea or noisy PRD | `spdd-plan` → `spdd-story` |
+| Broad requirement | `spdd-story` |
+| Focused story or requirement | `spdd-analysis` |
+| Analysis artifact in `spdd/analysis/` | `spdd-reasons-canvas` |
+| Prompt artifact in `spdd/prompt/` | `spdd-generate` |
 
-What good looks like:
-
-- you are not forcing a broad idea into `spdd-generate`
-- your command matches the artifact you actually have
-- the workflow starts from the smallest valid phase instead of repeating context
+::: tip Good signal
+- You are not forcing a broad idea into `spdd-generate`.
+- Your command matches the artifact you actually have.
+- The workflow starts from the smallest valid phase instead of repeating context.
+:::
 
 ## Step 3: Watch the artifact handoff
 
 SpecArk works best when each phase creates a file that becomes the next phase's input.
 
-Typical output locations:
-
-- `spdd/plan/`
-- `requirements/`
-- `spdd/analysis/`
-- `spdd/prompt/`
-- `spdd/tests/`
-
-Typical progression:
-
-```text
+```
 idea.md
--> requirements/STORY-001.md
--> spdd/analysis/ANALYSIS-001.md
--> spdd/prompt/PROMPT-001.md
--> implementation files
--> spdd/tests/<verification assets>
+  └─ requirements/STORY-001.md       ← spdd-story
+       └─ spdd/analysis/ANALYSIS.md  ← spdd-analysis
+            └─ spdd/prompt/PROMPT.md ← spdd-reasons-canvas
+                 └─ implementation   ← spdd-generate
+                      └─ spdd/tests/ ← spdd-api-test (optional)
 ```
 
-What good looks like:
-
-- each step leaves behind a repository file
-- the next command points at that file instead of pasting the same context again
-- you can inspect the artifact before moving forward
+::: tip Good signal
+- Each step leaves behind a repository file.
+- The next command points at that file instead of pasting the same context again.
+- You can inspect the artifact before moving forward.
+:::
 
 ## Step 4: Know when to choose orchestrator vs manual flow
 
-Choose the orchestrator when:
+**Choose the orchestrator when:**
 
 - the requirement is broad
 - you want review gates between phases
 - you are still learning the workflow
 
-Choose manual phase entry when:
+**Choose manual phase entry when:**
 
 - you already have the correct artifact for the next phase
 - you want a narrow, single-purpose request
@@ -105,10 +98,12 @@ That tutorial covers:
 
 ## Common mistakes
 
-- Starting with `spdd-generate` before a prompt exists in `spdd/prompt/`
-- Re-pasting the full requirement into every phase instead of passing the produced artifact
-- Treating README, getting started, and workflow reference pages as interchangeable
-- Mixing maintainer-only local plugin work with the first-time adopter path
+::: warning Avoid these
+- Starting with `spdd-generate` before a prompt exists in `spdd/prompt/`.
+- Re-pasting the full requirement into every phase instead of passing the produced artifact.
+- Treating README, getting started, and workflow reference pages as interchangeable.
+- Mixing maintainer-only local plugin work with the first-time adopter path.
+:::
 
 ## Read next
 

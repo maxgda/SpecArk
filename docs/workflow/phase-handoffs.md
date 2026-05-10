@@ -1,6 +1,6 @@
 # Phase Handoffs
 
-The orchestrator and the phase skills are connected by a standard machine-readable result block.
+The orchestrator and the phase skills are connected by a standard machine-readable result block. Every phase must emit one of these at the end of its run.
 
 ## Required result block
 
@@ -28,24 +28,36 @@ It lets the controller:
 - determine the next recommended phase
 - decide whether to stop, ask, or continue
 
+::: tip Reading the result block
+After any phase runs, look for the `SPDD_PHASE_RESULT` block in the response. The `output_files` list tells you exactly which repository files were created or changed. The `next_phase` field tells you where the workflow recommends going next.
+:::
+
 ## Validation expectations
 
 At minimum, a valid phase handoff should ensure:
 
-- `phase` matches the phase that just ran
-- `status` is `completed` or `blocked`
-- `output_files` are repository-relative and real for created or changed artifacts
-- `next_phase` is plausible for the current position in the workflow
-- `summary` stays on one line
+| Field | Requirement |
+|---|---|
+| `phase` | matches the phase that just ran |
+| `status` | `completed` or `blocked` |
+| `output_files` | repository-relative, real paths for created or changed artifacts |
+| `next_phase` | plausible for the current position in the workflow |
+| `summary` | single line only |
 
 ## Common phase outputs
 
-- `spdd-story` should usually create files under `requirements/`
-- `spdd-analysis` should usually create files under `spdd/analysis/`
-- `spdd-reasons-canvas`, `spdd-prompt-update`, and `spdd-sync` should usually create files under `spdd/prompt/`
-- `spdd-generate` should usually report changed implementation files
-- `spdd-api-test` should usually report changed verification assets
+| Phase | Expected output location |
+|---|---|
+| `spdd-story` | `requirements/` |
+| `spdd-analysis` | `spdd/analysis/` |
+| `spdd-reasons-canvas` | `spdd/prompt/` |
+| `spdd-prompt-update` | `spdd/prompt/` |
+| `spdd-sync` | `spdd/prompt/` |
+| `spdd-generate` | implementation files (project-specific) |
+| `spdd-api-test` | `spdd/tests/` |
 
 ## Failure rule
 
-If a phase returns a malformed or suspicious handoff block, the orchestrator should treat the workflow as blocked instead of guessing.
+::: warning Malformed handoffs
+If a phase returns a malformed or suspicious handoff block, the orchestrator treats the workflow as blocked instead of guessing. Do not manually patch the block or continue — diagnose why the phase produced a bad result first.
+:::

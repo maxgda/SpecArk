@@ -2,19 +2,35 @@
 
 `spdd-api-test` generates or updates API-oriented verification artifacts from prompts or implemented behavior.
 
+## Quick start
+
+```text
+Use the spdd-api-test skill on @spdd/prompt/PROMPT-001.md.
+```
+
 ## Use it when
 
 - the generated change affects API behavior
 - you want reusable verification assets after implementation
 - the workflow should end with explicit API-oriented checks
 
-## Output shape
+## Output
 
-This phase should typically produce:
+This phase produces:
 
-- changed verification assets
+- changed verification assets under `spdd/tests/`
 - a phase result block recommending completion
 
-## Notes
+## Role in the workflow
 
-This phase is optional and should be used when the implementation warrants API-focused verification.
+```
+spdd-generate → spdd-api-test (optional) → done
+```
+
+::: info Optional phase
+This phase is optional. Use it when the implementation warrants API-focused verification. It is not a general test generation skill — it is focused specifically on API-oriented verification assets.
+:::
+
+::: tip When to skip it
+For changes that do not involve API contracts, endpoints, or API-level behavior, `spdd-api-test` is not the right tool. Use the project's own test infrastructure instead.
+:::
