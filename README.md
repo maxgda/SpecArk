@@ -15,34 +15,35 @@ codex plugin marketplace add maxgda/SpecArk
 codex plugin marketplace upgrade
 ```
 
-### Claude Code — one-time setup
+### Claude Code — two-command startup
 
 ```bash
-git submodule add https://github.com/maxgda/SpecArk.git plugins/specark-plugin
+claude plugin marketplace add maxgda/SpecArk
+claude plugin install specark
 ```
-
-Then add to your `CLAUDE.md`:
-
-```markdown
-@plugins/specark-plugin/plugins/specark/CLAUDE.md
-```
-
-See [docs/installation-claude-code.md](docs/installation-claude-code.md) for all install options.
 
 ### First real run
 
-If you are starting from a broad idea and want the default path:
+**Codex** — starting from a broad idea:
 
 ```text
 Use the spdd-orchestrator skill on @idea-of-the-enhancement.md in semi-auto mode.
 ```
 
+**Claude Code** — starting from a broad idea:
+
+```text
+/specark:spdd-orchestrator @idea-of-the-enhancement.md semi-auto
+```
+
 If you already know the exact artifact you have, jump to the matching phase:
 
 ```text
+# Codex
 Use the spdd-analysis skill on @requirements/STORY-001.md.
-Use the spdd-reasons-canvas skill on @spdd/analysis/ANALYSIS-001.md.
-Use the spdd-generate skill on @spdd/prompt/PROMPT-001.md.
+
+# Claude Code
+/specark:spdd-analysis @requirements/STORY-001.md
 ```
 
 ## Why SpecArk
@@ -84,7 +85,7 @@ These artifacts belong to the consuming project, not the plugin itself.
 
 ## First 10 Minutes
 
-1. Install with the two marketplace commands above.
+1. Install with the marketplace commands above (Codex or Claude Code).
 2. Run the orchestrator if you are starting broad, or jump straight to the phase that matches your current artifact.
 3. Review the produced artifact before moving forward to the next phase.
 4. Continue into the implementation prompt and generated code.

@@ -6,28 +6,29 @@ This page tracks release-facing changes at a higher level than the raw changelog
 
 ### Added
 
-- **Claude Code platform support**: SpecArk now works with both Codex and Claude Code. Install via git submodule or direct clone and reference `plugins/specark/CLAUDE.md` from your project's `CLAUDE.md`.
-- `plugins/specark/CLAUDE.md`: new Claude Code plugin entry point listing all nine skills, invocation syntax, and supporting references.
-- `docs/installation-claude-code.md`: step-by-step install guide for Claude Code (submodule, clone, and skills-only options).
-- Codex and Claude Code SVG logos in `docs/public/` for use in documentation.
+- **Claude Code platform support**: SpecArk now works with both Codex and Claude Code via the standard plugin marketplace mechanism.
+- `plugins/specark/.claude-plugin/plugin.json`: Claude Code plugin manifest, mirroring the existing `.codex-plugin/plugin.json` layout.
+- `.claude-plugin/marketplace.json`: repo-root marketplace file for `claude plugin marketplace add`.
+- `docs/installation-claude-code.md`: step-by-step Claude Code install guide (`claude plugin marketplace add maxgda/SpecArk` + `claude plugin install specark`).
+- Real Anthropic and OpenAI inline SVG logo marks on the docs home page and installation pages.
 - GitHub quick-link action button on the docs home page.
-- Platform compatibility badges (Codex · Claude Code) on the docs home page.
 - VitePress code-group tabs on Getting Started and First Feature Tutorial for side-by-side Codex / Claude Code syntax.
 
 ### Changed
 
-- `docs/index.md`: tagline and "What this site covers" section updated to reflect dual-platform support. Removed Codex-only framing.
-- `docs/installation.md`: restructured into Codex and Claude Code sections with platform logos.
-- `docs/getting-started.md`: Step 1 install block now shows both platforms in a code-group tab.
-- `docs/first-feature.md`: install and branch steps now show Codex and Claude Code alternatives.
-- `docs/.vitepress/config.mjs`: added `installation-claude-code` to the Overview sidebar section.
-- `plugins/specark/skills/spdd-analysis/SKILL.md` and `spdd-story/SKILL.md`: removed "Codex skill" wording from `description` frontmatter fields so descriptions are platform-neutral.
+- All 9 `SKILL.md` files: added `disable-model-invocation: true` to frontmatter and removed platform-specific "Codex skill" wording from descriptions.
+- `docs/index.md`: platform compatibility badges with real logo marks; GitHub action button; Codex-only framing removed.
+- `docs/installation.md`: restructured into Codex and Claude Code sections with inline SVG platform icons.
+- `docs/getting-started.md`, `docs/first-feature.md`: `/specark:skill-name` invocation syntax shown for Claude Code.
+- `docs/.vitepress/config.mjs`: added Installation — Claude Code to the Overview sidebar.
+- `plugins/specark/CLAUDE.md`: simplified to a reference overview; install entry-point role moved to `.claude-plugin/plugin.json`.
+- `README.md`: Claude Code startup section updated to `claude plugin marketplace add` / `claude plugin install`.
+- `validate_plugin_bundle.py`: checks both `.claude-plugin/plugin.json` and `.claude-plugin/marketplace.json`, plus `disable-model-invocation: true` in every skill.
 
 ### Notes
 
 - The Codex install path (`codex plugin marketplace add`) is unchanged.
 - `agents/openai.yaml` files are unchanged — Claude Code does not consume them.
-- `validate_plugin_bundle.py` now checks for `plugins/specark/CLAUDE.md` as part of the bundle validation.
 
 ---
 
@@ -48,11 +49,10 @@ Before publishing a new version:
 1. Run `python3 plugins/specark/scripts/validate_plugin_bundle.py`.
 2. Run `npm run docs:build`.
 3. Review `CHANGELOG.md` and add the final versioned entry.
-4. Verify `plugins/specark/.codex-plugin/plugin.json` has correct publisher and release metadata.
-5. Verify `plugins/specark/CLAUDE.md` is present and lists all skills.
-6. Restart Codex and verify the plugin is discoverable from `.agents/plugins/marketplace.json`.
-7. Test Claude Code installation using one of the three install options in `docs/installation-claude-code.md`.
-8. Tag the release after validation is clean.
+4. Verify `plugins/specark/.codex-plugin/plugin.json` and `plugins/specark/.claude-plugin/plugin.json` have correct version and metadata.
+5. Restart Codex and verify the plugin is discoverable from `.agents/plugins/marketplace.json`.
+6. Test Claude Code installation: `claude plugin marketplace add maxgda/SpecArk && claude plugin install specark`.
+7. Tag the release after validation is clean.
 
 ## Suggested release summary format
 
