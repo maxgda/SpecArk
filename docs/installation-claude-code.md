@@ -1,6 +1,6 @@
-# Installation — Claude Code
+# Installation — Claude Code &amp; Cowork
 
-SpecArk is distributed as a Claude Code plugin through the standard marketplace mechanism. Install it the same way you install any Claude Code plugin from a GitHub repository.
+SpecArk works in both **Claude Code** (CLI) and **Claude Cowork** (desktop). Both use the same plugin format and the same marketplace install commands.
 
 ## Install from the marketplace
 
@@ -79,6 +79,30 @@ Or jump directly to the matching phase if you already have an artifact:
 ```bash
 claude plugin marketplace upgrade
 ```
+
+---
+
+## Using SpecArk in Claude Cowork {#cowork}
+
+Claude Cowork uses the **identical plugin format and marketplace system** as Claude Code. No separate install is needed — once the plugin is installed, it is available in both.
+
+**How to invoke skills in Cowork:**
+
+- Click the **+** button in the Cowork input bar to browse available skills, or
+- Type `/specark:` to filter to SpecArk skills directly.
+
+The skill invocation syntax is the same as Claude Code:
+
+```
+/specark:spdd-orchestrator @idea.md semi-auto
+/specark:spdd-analysis @requirements/STORY-001.md
+```
+
+**Cowork-specific notes:**
+
+- Skills appear in the "+" skill picker alongside any other installed plugins.
+- File references (`@file.md`) work the same way as in Claude Code sessions.
+- The SPDD artifact handoff model (each phase writing a repository file) fits naturally with Cowork's longer agentic work model.
 
 ## Read next
 

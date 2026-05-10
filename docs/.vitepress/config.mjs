@@ -81,7 +81,7 @@ export default {
             { text: "Getting Started", link: "/getting-started" },
             { text: "First Feature Tutorial", link: "/first-feature" },
             { text: "Installation — Codex", link: "/installation" },
-            { text: "Installation — Claude Code", link: "/installation-claude-code" },
+            { text: "Installation — Claude Code & Cowork", link: "/installation-claude-code" },
             { text: "Plugin Layout", link: "/plugin-layout" },
             { text: "Limitations", link: "/limitations" },
             { text: "Next Steps", link: "/next-steps" },

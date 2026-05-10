@@ -1,6 +1,6 @@
 # SpecArk
 
-Structured Prompt-Driven Development, packaged as a Git-distributed plugin bundle for **Codex** and **Claude Code**.
+Structured Prompt-Driven Development, packaged as a Git-distributed plugin bundle for **Codex**, **Claude Code**, and **Claude Cowork**.
 
 SpecArk turns SPDD into an explicit, artifact-driven workflow instead of a loose series of prompts. It helps you move from an idea or requirement to analysis, prompt generation, implementation, and optional verification by handing repository files from one phase to the next.
 
@@ -15,12 +15,14 @@ codex plugin marketplace add maxgda/SpecArk
 codex plugin marketplace upgrade
 ```
 
-### Claude Code — two-command startup
+### Claude Code &amp; Cowork — two-command startup
 
 ```bash
 claude plugin marketplace add maxgda/SpecArk
 claude plugin install specark
 ```
+
+Works in both Claude Code (CLI) and Claude Cowork (desktop). One install covers both.
 
 ### First real run
 
