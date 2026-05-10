@@ -70,6 +70,7 @@ The orchestrator should always preserve explicit artifact lineage:
 - which phase is next
 
 Do not allow the flow to become ambiguous. If multiple candidate inputs exist and the correct one is not obvious, stop and ask instead of guessing.
+If the user supplied an explicit `@file` or repository path, validate that it exists, is readable, and matches the artifact type implied by the selected starting phase before invoking any downstream skill. If not, stop and ask the user nicely to provide the correct file or say whether to proceed with current context.
 
 ## Execution Modes
 
@@ -256,6 +257,7 @@ Stop immediately when any of these conditions is true:
 - the requested `stop-after` phase has been reached
 - the workflow reported `next_phase: complete`
 - the correct next input artifact is ambiguous
+- a user-supplied file path is missing, unreadable, or clearly the wrong artifact type for the selected phase, unless the user explicitly says to proceed with current context
 - user clarification is required by a downstream phase contract
 
 When stopping, clearly state whether the stop was expected, user-controlled, or due to blockage.

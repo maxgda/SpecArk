@@ -40,6 +40,12 @@ Input can be provided in two ways:
    **IMPORTANT**: Do NOT proceed without business context input.
 
    b. **If input contains `@` file/folder references**:
+   - Validate that every referenced path exists and is readable before using it
+   - Validate that each referenced artifact fits this phase: requirement files, story files, analysis artifacts, and other business-context files are acceptable; downstream prompt/test artifacts and implementation files are not valid primary inputs for `/spdd-reasons-canvas`
+   - If a referenced file is missing or unreadable, stop and ask:
+     > "I couldn't read `<path>`. Please provide the correct file, or tell me if you want to proceed with the current context instead."
+   - If a referenced file is clearly the wrong artifact type for this phase, stop and ask:
+     > "That file is not the right input for `/spdd-reasons-canvas`. Please provide a requirement or analysis file, or tell me if you want to proceed with the current context instead."
    - Read ALL referenced files completely using the Read tool
    - For folder references, read all relevant files within the folder (`.md`, `.txt`, `.yaml`, `.json`, etc.)
    - Consolidate all file contents into a unified business context
@@ -447,6 +453,7 @@ A fully-populated, implementation-ready REASONS-Canvas structured prompt saved t
 
 - **CRITICAL**: Do NOT just output section headers - you MUST analyze business context and generate fully-populated content for all 7 REASONS stages
 - Do NOT proceed without business context input
+- Do NOT accept a missing, unreadable, or wrong-artifact file silently — stop and ask the user to provide the correct file or explicitly proceed with current context
 - Do NOT include framework metadata (Objective, Construction Guidance, Quality Standards) in the final prompt
 - Do NOT leave placeholders or TODO items - generate complete, specific content
 - Do NOT implement code before user confirms the structured prompt

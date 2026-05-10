@@ -144,6 +144,7 @@ Before reporting success, verify all of the following:
 Stop immediately when:
 
 - required startup references cannot be read
+- a user-supplied file path is missing, unreadable, or clearly the wrong artifact type for planning, unless the user explicitly says to proceed with current context
 - the input is too incomplete for trustworthy slice planning
 - the request is already better served by `spdd-story` or `spdd-analysis`
 - repository evidence shows reuse is the correct path

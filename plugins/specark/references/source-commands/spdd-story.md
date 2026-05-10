@@ -37,6 +37,12 @@ Input can be provided in two ways:
    **IMPORTANT**: Do NOT proceed without business input.
 
    b. **If input contains `@` file/folder references**:
+   - Validate that every referenced path exists and is readable before using it
+   - Validate that each referenced artifact fits this phase: business requirement files, product briefs, or other upstream requirement-context files are acceptable; downstream SPDD analysis, prompt, and test artifacts are not valid primary inputs for `/spdd-story`
+   - If a referenced file is missing or unreadable, stop and ask:
+     > "I couldn't read `<path>`. Please provide the correct file, or tell me if you want to proceed with the current context instead."
+   - If a referenced file is clearly the wrong artifact type for this phase, stop and ask:
+     > "That file is not the right input for `/spdd-story`. Please provide a business requirement file, or tell me if you want to proceed with the current context instead."
    - Read ALL referenced files completely using the Read tool
    - For folder references, read all relevant files within the folder
    - Consolidate all file contents into a unified business context
@@ -328,6 +334,7 @@ Structured, INVEST-compliant story document(s) saved to `requirements/`, contain
 **Guardrails**
 
 - Do NOT proceed without business requirement input
+- Do NOT accept a missing, unreadable, or wrong-artifact file silently — stop and ask the user to provide the correct file or explicitly proceed with current context
 - Do NOT explore the codebase — codebase analysis is `/spdd-analysis`'s responsibility
 - Do NOT summarize or truncate the original business requirement — preserve it verbatim when referenced
 - Do NOT generate code — this command produces stories only

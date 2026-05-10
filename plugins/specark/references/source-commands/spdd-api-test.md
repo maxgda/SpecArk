@@ -41,6 +41,12 @@ Input can be provided in several ways:
    **IMPORTANT**: Do NOT proceed without input context.
 
    b. **If input contains `@` file/folder references**:
+   - Validate that every referenced path exists and is readable before using it
+   - Validate that each referenced artifact fits this phase: API implementation files/folders, API specs, acceptance-criteria documents, and prompt artifacts are acceptable; planning or analysis artifacts alone are not sufficient primary inputs for `/spdd-api-test`
+   - If a referenced file is missing or unreadable, stop and ask:
+     > "I couldn't read `<path>`. Please provide the correct file, or tell me if you want to proceed with the current context instead."
+   - If a referenced file is clearly the wrong artifact type for this phase, stop and ask:
+     > "That file is not the right input for `/spdd-api-test`. Please provide API implementation files, an API spec, or an SPDD prompt file, or tell me if you want to proceed with the current context instead."
    - Read ALL referenced files completely using the Read tool
    - For folder references, read all relevant API-related files (controllers, routes, handlers)
    - Consolidate all file contents into a unified API context
@@ -388,6 +394,7 @@ A self-contained, executable shell script (`scripts/test-api.sh`) with:
 **Guardrails**
 
 - Do NOT proceed without input context (API files or ACs)
+- Do NOT accept a missing, unreadable, or wrong-artifact file silently — stop and ask the user to provide the correct file or explicitly proceed with current context
 - Do NOT use external tools like `jq`, `yq`, or `python` in the generated script
 - Do NOT generate tests without proper timeout (`-m 10`)
 - Do NOT skip edge cases (zero values, missing fields, invalid IDs)

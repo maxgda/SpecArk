@@ -32,10 +32,20 @@ Update Safeguards section to add rate limiting constraints
    a. **If no prompt file provided**, use the **AskUserQuestion tool** to ask:
    > "Please provide the path to the SPDD prompt file to update (e.g., `@spdd/prompt/xxx.md`)"
 
+   a1. **If a prompt file was provided, validate it before reading it**:
+   - Confirm the referenced file exists and is readable
+   - Confirm it is the required artifact type for this phase: an SPDD prompt file under `spdd/prompt/`
+
+   a2. **If the file is missing or unreadable**, stop and ask:
+   > "I couldn't read that prompt file. Please provide a valid `@spdd/prompt/...` file, or tell me if you want to proceed with the current context instead."
+
+   a3. **If the file is readable but is not the required artifact type**, stop and ask:
+   > "That file is not an SPDD prompt artifact for `/spdd-prompt-update`. Please provide a valid `@spdd/prompt/...` file, or tell me if you want to proceed with the current context instead."
+
    b. **If no update instructions provided**, use the **AskUserQuestion tool** to ask:
    > "What changes would you like to make to this prompt? (e.g., new requirements, architectural changes, constraint updates)"
 
-   **IMPORTANT**: Do NOT proceed without both the file path and update instructions.
+   **IMPORTANT**: Do NOT proceed without both the file path and update instructions unless the user explicitly says to proceed with current context.
 
 2. **Read and analyze the existing prompt**
 
@@ -129,6 +139,7 @@ The updated SPDD prompt file with changes integrated while preserving the REASON
 **Guardrails**
 
 - **CRITICAL**: Do NOT rewrite the entire file - only modify sections that need changes
+- Do NOT accept a missing, unreadable, or wrong-artifact file silently — stop and ask the user to provide the correct file or explicitly proceed with current context
 - Do NOT proceed without both file path and update instructions
 - Do NOT change sections that are unaffected by the update request
 - Do NOT break cross-section consistency - if you update Entities, check Operations too

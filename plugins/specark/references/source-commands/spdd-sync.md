@@ -11,13 +11,23 @@ Synchronize implementation details from refactored or updated code back to the s
 
 **Steps**
 
-1. **If no input provided, ask for the prompt file**
+1. **Validate the prompt input**
 
-   Use the **AskUserQuestion tool** to ask:
+   a. **If no input provided**, use the **AskUserQuestion tool** to ask:
 
    > "Please provide the path to the structured prompt file you want to sync (e.g., `@spdd/prompt/xxx.md`)."
 
-   **IMPORTANT**: Do NOT proceed without a valid prompt file path.
+   b. **Before reading the file, validate the supplied reference**:
+   - Confirm the referenced file exists and is readable
+   - Confirm it is the required artifact type for this phase: an SPDD prompt file under `spdd/prompt/`
+
+   c. **If the file is missing or unreadable**, stop and ask:
+   > "I couldn't read that prompt file. Please provide a valid `@spdd/prompt/...` file, or tell me if you want to proceed with the current context instead."
+
+   d. **If the file is readable but is not the required artifact type**, stop and ask:
+   > "That file is not an SPDD prompt artifact for `/spdd-sync`. Please provide a valid `@spdd/prompt/...` file, or tell me if you want to proceed with the current context instead."
+
+   **IMPORTANT**: Do NOT proceed without a valid prompt file path unless the user explicitly says to proceed with current context.
 
 2. **Read and parse the structured prompt file**
 
@@ -217,6 +227,7 @@ When syncing different types of changes:
 **Guardrails**
 
 - Do NOT remove content from prompt without explicit user approval
+- Do NOT accept a missing, unreadable, or wrong-artifact file silently — stop and ask the user to provide the correct file or explicitly proceed with current context
 - Do NOT change Requirements section unless user explicitly requests (business goals shouldn't change from code refactoring)
 - Do NOT simplify or abbreviate existing detailed specifications
 - Do NOT change error messages in Safeguards unless they actually changed in code
