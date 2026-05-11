@@ -177,6 +177,15 @@ Source-of-truth workflow text is preserved under:
 
 Provenance metadata lives in `plugins/specark/references/source-commands/SOURCES.md`.
 
+## Credits & Prior Art
+
+SpecArk is a Codex / Claude Code / Cowork packaging of an existing methodology. It does not invent SPDD or the REASONS Canvas.
+
+- **Methodology — Structured-Prompt-Driven Development (SPDD) and the REASONS Canvas:** authored by **Wei Zhang** and **Jessie Jie Xia** (Thoughtworks). See ["Structured-Prompt-Driven Development"](https://martinfowler.com/articles/structured-prompt-driven/) on martinfowler.com (28 April 2026).
+- **Reference implementation — canonical phase commands:** the files under [`plugins/specark/references/source-commands/`](plugins/specark/references/source-commands/) are copied verbatim from [`gszhangwei/open-spdd`](https://github.com/gszhangwei/open-spdd) and remain under that project's MIT license (© 2026 gszhangwei). Per-file provenance is in [SOURCES.md](plugins/specark/references/source-commands/SOURCES.md); the full upstream notice is reproduced in [LICENSE-THIRD-PARTY.md](LICENSE-THIRD-PARTY.md).
+
+SpecArk itself is MIT-licensed — see [LICENSE](LICENSE).
+
 ## Read More
 
 - [Getting Started](docs/getting-started.md)

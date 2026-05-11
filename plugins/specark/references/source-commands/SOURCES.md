@@ -1,6 +1,22 @@
 # Canonical Source Commands
 
-These files are copied verbatim from the source repository command definitions and are the canonical contracts for the local Codex SPDD skills.
+These files are copied verbatim from the source repository command definitions and are the canonical contracts for the local Codex / Claude Code SPDD skills.
+
+## Attribution
+
+The seven `spdd-*.md` files in this directory are copied from
+[`gszhangwei/open-spdd`](https://github.com/gszhangwei/open-spdd) and are
+governed by that project's MIT License (© 2026 gszhangwei). The full upstream
+notice is reproduced in [`LICENSE-THIRD-PARTY.md`](../../../../LICENSE-THIRD-PARTY.md)
+at the repository root and must accompany any redistribution of these files.
+
+The underlying methodology — Structured-Prompt-Driven Development (SPDD) and
+the REASONS Canvas — was authored by **Wei Zhang** and **Jessie Jie Xia**
+(Thoughtworks). See ["Structured-Prompt-Driven Development"](https://martinfowler.com/articles/structured-prompt-driven/)
+on martinfowler.com (28 April 2026).
+
+The `spdd-session-health.md` file in this directory is original to SpecArk
+(MIT, © 2026 maxgda) and is not part of the upstream open-spdd distribution.
 
 ## spdd-story.md
 
