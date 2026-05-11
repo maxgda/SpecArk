@@ -62,10 +62,16 @@ export default {
   base: "/spec-ark/",
   cleanUrls: true,
   lastUpdated: true,
+  head: [
+    ["link", { rel: "icon", type: "image/svg+xml", href: "/spec-ark/logo.svg" }]
+  ],
   themeConfig: {
     logo: {
-      text: "SpecArk"
+      light: "/logo.svg",
+      dark: "/logo-dark.svg",
+      alt: "SpecArk"
     },
+    siteTitle: "SpecArk",
     nav: [
       { text: "Guide", link: "/getting-started" },
       { text: "First Feature", link: "/first-feature" },

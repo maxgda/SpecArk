@@ -1,3 +1,10 @@
+<p align="left">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="docs/public/logo-dark.svg">
+    <img src="docs/public/logo.svg" alt="SpecArk" width="72" height="72">
+  </picture>
+</p>
+
 # SpecArk
 
 Structured Prompt-Driven Development, packaged as a Git-distributed plugin bundle for **Codex**, **Claude Code**, and **Claude Cowork**.
