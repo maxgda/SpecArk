@@ -5,7 +5,7 @@ SpecArk works in both **Claude Code** (CLI) and **Claude Cowork** (desktop). Bot
 ## Install from the marketplace
 
 ```bash
-claude plugin marketplace add maxgda/SpecArk
+claude plugin marketplace add maxgda/spec-ark
 claude plugin install specark
 ```
 

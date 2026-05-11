@@ -11,14 +11,14 @@ Use it when your repository needs a repeatable path from broad request to implem
 ### Codex — two-command startup
 
 ```bash
-codex plugin marketplace add maxgda/SpecArk
+codex plugin marketplace add maxgda/spec-ark
 codex plugin marketplace upgrade
 ```
 
 ### Claude Code &amp; Cowork — two-command startup
 
 ```bash
-claude plugin marketplace add maxgda/SpecArk
+claude plugin marketplace add maxgda/spec-ark
 claude plugin install specark
 ```
 

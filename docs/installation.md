@@ -28,7 +28,7 @@ codex plugin marketplace upgrade
 Both products share the same plugin format and marketplace. One install covers both.
 
 ```bash
-claude plugin marketplace add maxgda/SpecArk
+claude plugin marketplace add maxgda/spec-ark
 claude plugin install specark
 ```
 

@@ -23,7 +23,7 @@ codex plugin marketplace upgrade
 ```
 
 ```bash [Claude Code]
-claude plugin marketplace add maxgda/SpecArk
+claude plugin marketplace add maxgda/spec-ark
 claude plugin install specark
 ```
 

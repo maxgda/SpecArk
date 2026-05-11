@@ -55,7 +55,7 @@ const workflowSidebar = [
 export default {
   title: "SpecArk",
   description: "Developer documentation for the SpecArk SPDD plugin — supports Codex and Claude Code",
-  base: "/SpecArk/",
+  base: "/spec-ark/",
   cleanUrls: true,
   lastUpdated: true,
   themeConfig: {

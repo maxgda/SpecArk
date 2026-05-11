@@ -9,7 +9,7 @@ This page tracks release-facing changes at a higher level than the raw changelog
 - **Claude Code platform support**: SpecArk now works with both Codex and Claude Code via the standard plugin marketplace mechanism.
 - `plugins/specark/.claude-plugin/plugin.json`: Claude Code plugin manifest, mirroring the existing `.codex-plugin/plugin.json` layout.
 - `.claude-plugin/marketplace.json`: repo-root marketplace file for `claude plugin marketplace add`.
-- `docs/installation-claude-code.md`: step-by-step Claude Code install guide (`claude plugin marketplace add maxgda/SpecArk` + `claude plugin install specark`).
+- `docs/installation-claude-code.md`: step-by-step Claude Code install guide (`claude plugin marketplace add maxgda/spec-ark` + `claude plugin install specark`).
 - Real Anthropic and OpenAI inline SVG logo marks on the docs home page and installation pages.
 - GitHub quick-link action button on the docs home page.
 - VitePress code-group tabs on Getting Started and First Feature Tutorial for side-by-side Codex / Claude Code syntax.
@@ -51,7 +51,7 @@ Before publishing a new version:
 3. Review `CHANGELOG.md` and add the final versioned entry.
 4. Verify `plugins/specark/.codex-plugin/plugin.json` and `plugins/specark/.claude-plugin/plugin.json` have correct version and metadata.
 5. Restart Codex and verify the plugin is discoverable from `.agents/plugins/marketplace.json`.
-6. Test Claude Code installation: `claude plugin marketplace add maxgda/SpecArk && claude plugin install specark`.
+6. Test Claude Code installation: `claude plugin marketplace add maxgda/spec-ark && claude plugin install specark`.
 7. Tag the release after validation is clean.
 
 ## Suggested release summary format
