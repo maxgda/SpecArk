@@ -1,6 +1,6 @@
 {
   "name": "specark",
-  "version": "0.1.0",
+  "version": "0.3.0",
   "description": "Structured Prompt-Driven Development workflow for story creation, analysis, REASONS Canvas prompt generation, implementation, prompt updates, and sync.",
   "keywords": [
     "spdd",

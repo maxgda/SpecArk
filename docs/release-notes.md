@@ -2,6 +2,31 @@
 
 This page tracks release-facing changes at a higher level than the raw changelog.
 
+## 0.3.0 — Session health & UX polish
+
+### Added
+
+- **`spdd-session-health` skill**: pre-flight context-health check that assesses whether the current conversation is in good shape to execute the next SPDD phase.
+- **Orchestrator pre-flight integration**: `spdd-orchestrator` automatically invokes `spdd-session-health` when multiple input artifacts are detected or a prior phase was completed in the current session.
+- **Cowork compatibility** surfaced in docs — no plugin changes required.
+- **SpecArk logo** in the docs navbar, favicon, and README.
+
+### Changed
+
+- Home page, installation pages, and palette refreshed and unified for clarity.
+- Platform logos resized to small clickable thumbnails on the home and installation pages.
+
+### Fixed
+
+- Docs base path corrected after the repository rename so GitHub Pages assets resolve correctly.
+- Stale submodule install instructions corrected in README and release notes.
+
+### Notes
+
+- `spdd-plan` skill (added during the 0.2.0 cycle but not documented at the time) is now in the workflow table — see `plugins/specark/CLAUDE.md`.
+
+---
+
 ## 0.2.0 — Claude Code support
 
 ### Added
