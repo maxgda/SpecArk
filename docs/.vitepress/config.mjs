@@ -34,6 +34,10 @@ const skills = [
   {
     text: "spdd-api-test",
     link: "/skills/spdd-api-test"
+  },
+  {
+    text: "spdd-session-health",
+    link: "/skills/spdd-session-health"
   }
 ];
 

@@ -1,6 +1,6 @@
 # Skill Index
 
-SpecArk exposes one controller skill, one optional planning skill, and seven phase skills. Each skill is configured for explicit invocation — you name the skill you want, and it runs that phase only.
+SpecArk exposes one controller skill, one optional planning skill, seven phase skills, and one pre-flight utility. Each skill is configured for explicit invocation — you name the skill you want, and it runs that phase only.
 
 ## Controller
 
@@ -31,6 +31,14 @@ Use it when the input still spans multiple capabilities, dependency chains, or r
 | [spdd-prompt-update](/skills/spdd-prompt-update) | Existing prompt + change description | `spdd/prompt/` | Requirements or design changed after prompting |
 | [spdd-sync](/skills/spdd-sync) | Prompt artifact + implementation | `spdd/prompt/` | Implementation drifted from the prompt |
 | [spdd-api-test](/skills/spdd-api-test) | Implementation files or prompt | `spdd/tests/` | API-oriented verification assets are needed |
+
+## Pre-flight utility
+
+### [spdd-session-health](/skills/spdd-session-health)
+
+Assesses whether the current session is in good shape before committing to a phase invocation. Checks for prior phase completions, context spinning, instruction reversals, and input load. Produces a `SPDD_HEALTH_RESULT` block — not a repository artifact.
+
+The orchestrator runs this automatically before the first phase when multiple inputs are detected or a prior phase already completed in the session. You can also invoke it directly before any heavy phase.
 
 ## Invocation model
 

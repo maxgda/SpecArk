@@ -15,6 +15,7 @@ This file is a human-readable overview of the SpecArk plugin. For installation, 
 | `spdd-prompt-update` | `/specark:spdd-prompt-update` | Update a prompt after requirement changes |
 | `spdd-sync` | `/specark:spdd-sync` | Sync implementation reality back into the prompt |
 | `spdd-api-test` | `/specark:spdd-api-test` | Generate API-oriented verification assets |
+| `spdd-session-health` | `/specark:spdd-session-health` | Pre-flight session health check before phase invocation |
 
 ## Normal workflow sequence
 

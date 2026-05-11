@@ -66,3 +66,29 @@ These are the major artifact transitions. Stopping here lets you verify that the
 :::
 
 These gates are defined by the shared orchestrator contract. See [Orchestrator Contract](/references/orchestrator-contract) for full details.
+
+## Pre-flight health check
+
+Before invoking the first phase, the orchestrator automatically runs `spdd-session-health` when either condition is true:
+
+1. More than one input artifact was passed
+2. A completed `SPDD_PHASE_RESULT` already exists in the current conversation
+
+This check runs once — before the first phase only. It does not repeat between phases in the same orchestration loop.
+
+### How the orchestrator responds
+
+| Health result | `manual` / `semi-auto` / `resume` | `auto` |
+|---|---|---|
+| `ready` | Proceed | Proceed |
+| `caution` | Surface flags, ask to confirm | Log warning, proceed |
+| `blocked` | Stop — fix the input first | Stop — fix the input first |
+| `restart` | Stop — start a new session | Stop — start a new session |
+
+`blocked` and `restart` are hard stops regardless of mode. `caution` is advisory — `auto` logs it and continues.
+
+::: warning Three stories, one orchestrator call
+Passing three story files to the orchestrator in a single call triggers the health check. In `semi-auto` the orchestrator will surface the `multi-input` flag and ask which input to start with. In `auto` it will log the warning and process the first input — but each subsequent input should ideally start in a fresh session to avoid context accumulation.
+:::
+
+See [spdd-session-health](/skills/spdd-session-health) for the full check logic and verdict reference.
