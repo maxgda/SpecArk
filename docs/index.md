@@ -3,7 +3,7 @@ layout: home
 
 hero:
   name: "SpecArk"
-  text: "Structured Prompt-Driven Development, made shippable"
+  text: "Structured Prompt-Driven Development"
   tagline: "A native Claude Code and Codex plugin for spec-driven, traceable engineering."
   actions:
     - theme: brand
