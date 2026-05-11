@@ -11,14 +11,14 @@ You are in the right place if you want:
 - an explicit skill surface instead of vague prompting
 - a clear handoff from one phase to the next
 
-If you only need installation details or local docs commands, jump to [Installation](/installation).
+If you only need installation details, jump to [Codex install](/installation) or [Claude install](/installation-claude-code).
 
 ## Step 1: Install
 
 ::: code-group
 
 ```bash [Codex]
-codex plugin marketplace add <owner>/<repo>
+codex plugin marketplace add maxgda/spec-ark
 codex plugin marketplace upgrade
 ```
 

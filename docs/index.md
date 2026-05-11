@@ -17,23 +17,17 @@ hero:
       link: https://github.com/maxgda/spec-ark
 
 features:
-  - icon: 📄
-    title: Start with one artifact
+  - title: Start with one artifact
     details: Use a real repository file as the input, then hand artifacts from one phase to the next instead of re-pasting the same context.
-  - icon: 🎛️
-    title: Explicit workflow control
+  - title: Explicit workflow control
     details: Use the orchestrator for guided routing or invoke a single spdd-* phase directly when you already have the right artifact.
-  - icon: 💡
-    title: Low-token delivery
+  - title: Low-token delivery
     details: Narrow requests and file-backed handoffs keep prompts smaller, reviews clearer, and iteration cheaper.
-  - icon: 🚀
-    title: First-user to ship path
+  - title: First-user to ship path
     details: Move from install to a first successful feature with guided onboarding, a tutorial path, and clear phase handoffs.
-  - icon: 🔁
-    title: Clean recovery paths
+  - title: Clean recovery paths
     details: Use spdd-prompt-update or spdd-sync to correct drift after requirement changes or implementation refactors — no guesswork.
-  - icon: 🔍
-    title: Full traceability
+  - title: Full traceability
     details: Every phase leaves a reviewable artifact. Go from idea to code with a clear audit trail in your repository.
 ---
 
@@ -107,6 +101,58 @@ features:
   flex-shrink: 0;
 }
 </style>
+
+## Quick start
+
+Three commands to install SpecArk and hand the orchestrator a real request. Pick your platform.
+
+<Terminal title="your-project">
+
+::: code-group
+
+```bash [Claude Code]
+# 1. Add the marketplace
+claude plugin marketplace add maxgda/spec-ark
+
+# 2. Install the plugin
+claude plugin install specark
+
+# 3. Hand the orchestrator a real artifact (auto mode runs end-to-end)
+/specark:spdd-orchestrator mode=auto Add a thumbnail-upload step to
+the profile editor. See @src/components/ProfileEditor.tsx and the
+existing upload helper in @src/lib/upload.ts.
+```
+
+```bash [Codex]
+# 1. Add the marketplace
+codex plugin marketplace add maxgda/spec-ark
+codex plugin marketplace upgrade
+
+# 2. Hand the orchestrator a real artifact (auto mode runs end-to-end)
+Use the spdd-orchestrator skill on @idea.md in auto mode.
+# where idea.md describes the feature and references the relevant files,
+# e.g. @src/components/ProfileEditor.tsx and @src/lib/upload.ts.
+```
+
+:::
+
+</Terminal>
+
+## What that produces
+
+`auto` mode runs every phase end-to-end. Each one writes a reviewable artifact to your repository before the next phase starts:
+
+<ArtifactFlow :steps="[
+  { file: 'requirements/STORY-001.md', note: 'Focused story decomposed from the free-text request — clarifies scope and acceptance criteria.' },
+  { file: 'spdd/analysis/ANALYSIS-001.md', note: 'Architecture-aware analysis of the referenced files, the existing upload helper, and where the new step plugs in.' },
+  { file: 'spdd/prompt/PROMPT-001.md', note: 'The implementation prompt — the only input spdd-generate reads. Reviewable before any code changes.' },
+  { file: 'src/components/ProfileEditor.tsx (+)', note: 'Edits generated from the prompt artifact — new thumbnail-upload step wired into the existing editor.' },
+  { file: 'src/lib/upload.ts (~)', note: 'Targeted touch-ups to the helper called out in the request.' }
+]" />
+
+**End result.** The feature ships with a four-step audit trail: story → analysis → prompt → code. If anything looks off in the implementation, fix the prompt and regenerate — the artifacts stay in sync.
+
+**Further steps.** Walk the same path with your own input in the [First Feature Tutorial](/first-feature), or read the [Workflow Overview](/workflow/) for phase-by-phase detail.
 
 ## Start here if you are new
 

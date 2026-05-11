@@ -1,6 +1,6 @@
-# Installation — Claude Code &amp; Cowork
+# Installation — Claude Code
 
-SpecArk works in both **Claude Code** (CLI) and **Claude Cowork** (desktop). Both use the same plugin format and the same marketplace install commands.
+SpecArk works in both **Claude Code** (CLI) and **Claude Cowork** (desktop). Both use the same plugin format and the same marketplace install commands — one install covers both. See the [Cowork section](#cowork) for Cowork-specific notes.
 
 ## Install from the marketplace
 

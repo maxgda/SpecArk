@@ -10,7 +10,7 @@
       "description": "Structured Prompt-Driven Development workflow for Claude Code.",
       "version": "0.1.0",
       "category": "engineering",
-      "repository": "https://github.com/maxgda/SpecArk",
+      "repository": "https://github.com/maxgda/spec-ark",
       "keywords": ["spdd", "requirements", "prompt-driven-development", "reasons-canvas"]
     }
   ]

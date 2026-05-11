@@ -23,6 +23,23 @@ Canonical command text lives under `plugins/specark/references/source-commands/`
 
 That material should stay authoritative. The skill wrappers should point to it, not re-express it in slightly different ways.
 
+## Docs site
+
+Local commands:
+
+```bash
+npm install
+npm run docs:dev
+npm run docs:build
+npm run docs:preview
+```
+
+GitHub Pages setup (one-time):
+
+1. Open repository settings → Pages.
+2. Set `Build and deployment > Source` to `GitHub Actions`.
+3. Push to `main` and wait for the deploy workflow to finish.
+
 ## Notes for further development
 
 - Keep documentation split between user-facing operation and maintainer-facing release work.

@@ -4,13 +4,17 @@
 
 ## Quick start
 
-```text
-# Claude Code
-/specark:spdd-session-health for spdd-analysis on requirements/STORY-001.md
+::: code-group
 
-# Codex
+```text [Codex]
 Use the spdd-session-health skill for spdd-analysis on @requirements/STORY-001.md.
 ```
+
+```text [Claude Code]
+/specark:spdd-session-health for spdd-analysis on requirements/STORY-001.md
+```
+
+:::
 
 ## Use it when
 

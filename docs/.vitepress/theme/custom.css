@@ -1,0 +1,93 @@
+:root {
+  /* Decorative accents (kept for hero title + components, not for UI chrome) */
+  --sa-orange: #d97757;
+  --sa-purple-soft: #6e62c4;
+  --sa-purple-deep: #5d51b8;
+  --sa-indigo: #6075c4;
+  --sa-amber: #b8860b;
+  --sa-rose: #d96274;
+  --sa-ink: #111111;
+
+  /* Brand (used for buttons, links, accents) — soft violet, not vivid */
+  --vp-c-brand-1: #5d51b8;
+  --vp-c-brand-2: #6e62c4;
+  --vp-c-brand-3: #6e62c4;
+  --vp-c-brand-soft: rgba(110, 98, 196, 0.14);
+
+  /* Hero title keeps the gradient — softer endpoint to match new brand */
+  --vp-home-hero-name-color: transparent;
+  --vp-home-hero-name-background: linear-gradient(120deg, #d97757 0%, #6e62c4 100%);
+
+  --vp-home-hero-image-background-image: linear-gradient(
+    -45deg,
+    rgba(217, 119, 87, 0.28) 30%,
+    rgba(110, 98, 196, 0.32) 70%
+  );
+  --vp-home-hero-image-filter: blur(72px);
+
+  /* Callouts — calm, on-brand, no clashing oranges */
+  --vp-custom-block-tip-border: rgba(110, 98, 196, 0.22);
+  --vp-custom-block-tip-text: var(--vp-c-text-1);
+  --vp-custom-block-tip-bg: rgba(110, 98, 196, 0.07);
+  --vp-custom-block-tip-code-bg: rgba(110, 98, 196, 0.12);
+
+  --vp-custom-block-info-border: rgba(96, 117, 196, 0.22);
+  --vp-custom-block-info-text: var(--vp-c-text-1);
+  --vp-custom-block-info-bg: rgba(96, 117, 196, 0.07);
+  --vp-custom-block-info-code-bg: rgba(96, 117, 196, 0.12);
+
+  /* Warning: soft amber (conventional warning color, doesn't fight purple) */
+  --vp-custom-block-warning-border: rgba(184, 134, 11, 0.32);
+  --vp-custom-block-warning-text: var(--vp-c-text-1);
+  --vp-custom-block-warning-bg: rgba(184, 134, 11, 0.08);
+  --vp-custom-block-warning-code-bg: rgba(184, 134, 11, 0.14);
+
+  /* Danger: muted rose, not screaming red */
+  --vp-custom-block-danger-border: rgba(217, 98, 116, 0.28);
+  --vp-custom-block-danger-text: var(--vp-c-text-1);
+  --vp-custom-block-danger-bg: rgba(217, 98, 116, 0.08);
+  --vp-custom-block-danger-code-bg: rgba(217, 98, 116, 0.14);
+}
+
+.dark {
+  --vp-c-brand-1: #a59bf0;
+  --vp-c-brand-2: #8b80e3;
+  --vp-c-brand-3: #8b80e3;
+  --vp-c-brand-soft: rgba(165, 155, 240, 0.2);
+
+  --vp-custom-block-tip-border: rgba(165, 155, 240, 0.25);
+  --vp-custom-block-tip-bg: rgba(165, 155, 240, 0.08);
+  --vp-custom-block-tip-code-bg: rgba(165, 155, 240, 0.14);
+
+  --vp-custom-block-info-border: rgba(140, 158, 224, 0.25);
+  --vp-custom-block-info-bg: rgba(140, 158, 224, 0.08);
+  --vp-custom-block-info-code-bg: rgba(140, 158, 224, 0.14);
+
+  --vp-custom-block-warning-border: rgba(214, 168, 60, 0.3);
+  --vp-custom-block-warning-bg: rgba(214, 168, 60, 0.1);
+  --vp-custom-block-warning-code-bg: rgba(214, 168, 60, 0.18);
+
+  --vp-custom-block-danger-border: rgba(232, 130, 148, 0.3);
+  --vp-custom-block-danger-bg: rgba(232, 130, 148, 0.1);
+  --vp-custom-block-danger-code-bg: rgba(232, 130, 148, 0.18);
+}
+
+.VPHero .image-container {
+  width: 320px;
+  height: 320px;
+}
+
+@media (max-width: 640px) {
+  .VPHero .image-container {
+    width: 220px;
+    height: 220px;
+  }
+}
+
+.VPFeature .icon {
+  display: none;
+}
+
+.VPFeature .box {
+  padding-top: 28px;
+}

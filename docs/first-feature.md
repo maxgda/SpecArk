@@ -31,7 +31,7 @@ Step 7: Review and hand off
 ::: code-group
 
 ```bash [Codex]
-codex plugin marketplace add <owner>/<repo>
+codex plugin marketplace add maxgda/spec-ark
 codex plugin marketplace upgrade
 ```
 
