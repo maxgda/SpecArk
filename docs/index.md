@@ -3,8 +3,8 @@ layout: home
 
 hero:
   name: "SpecArk"
-  text: "Structured Prompt-Driven Development"
-  tagline: "A Git-distributed plugin that turns SPDD into an explicit, artifact-driven workflow — from idea to implementation."
+  text: "Structured Prompt-Driven Development, made shippable"
+  tagline: "A native Claude Code and Codex plugin for spec-driven, traceable engineering."
   actions:
     - theme: brand
       text: Get Started →
@@ -185,15 +185,6 @@ Use this documentation when you need to:
 - understand how handoff artifacts move from story to analysis to prompt to implementation
 - keep token usage low while still preserving reviewable workflow checkpoints
 - maintain or extend the plugin after the first-user path is already clear
-
-## Credits & Prior Art
-
-SpecArk is a Codex / Claude Code / Cowork packaging of an existing methodology — it does not invent SPDD or the REASONS Canvas.
-
-- **Methodology:** Structured-Prompt-Driven Development (SPDD) and the REASONS Canvas, authored by **Wei Zhang** and **Jessie Jie Xia** (Thoughtworks). See ["Structured-Prompt-Driven Development"](https://martinfowler.com/articles/structured-prompt-driven/) on martinfowler.com (28 April 2026).
-- **Reference implementation:** the canonical phase command files under `plugins/specark/references/source-commands/` are copied verbatim from [`gszhangwei/open-spdd`](https://github.com/gszhangwei/open-spdd) (MIT, © 2026 gszhangwei). See the repository's `LICENSE-THIRD-PARTY.md` for the upstream notice and `SOURCES.md` for per-file provenance.
-
-SpecArk itself is MIT-licensed.
 
 ## Read next
 

@@ -128,6 +128,13 @@
   100% { transform: translate(160px, 160px) rotate(600deg) translate(110px) rotate(-600deg); }
 }
 
+@media (max-width: 640px) {
+  .hero-anim,
+  .hero-anim svg {
+    overflow: hidden;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .ha-glow,
   .ha-ring-1,
