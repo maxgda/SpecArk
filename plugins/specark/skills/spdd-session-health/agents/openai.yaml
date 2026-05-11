@@ -1,0 +1,8 @@
+interface:
+  display_name: "SPDD Session Health"
+  short_description: "Pre-flight session health check before SPDD phase execution"
+  brand_color: "#7C3AED"
+  default_prompt: "Use $spdd-session-health for spdd-analysis on requirements/STORY-001.md."
+
+policy:
+  allow_implicit_invocation: false

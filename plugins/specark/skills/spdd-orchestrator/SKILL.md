@@ -43,6 +43,7 @@ Before orchestrating, read these files:
 - `../spdd-prompt-update/SKILL.md`
 - `../spdd-sync/SKILL.md`
 - `../spdd-api-test/SKILL.md`
+- `../spdd-session-health/SKILL.md`
 
 Read all of them at the start when you need to coordinate the full flow. If the workflow is clearly resuming from a later artifact, it is still acceptable to focus operational attention on only the relevant downstream phase skills after the initial read.
 
@@ -181,12 +182,13 @@ Follow this loop strictly:
 2. Resolve any optional controls.
 3. Detect the starting phase.
 4. If the mode is `plan-only`, return the phase plan and stop.
+4.5. Run a pre-flight health check **once, before the first phase only**. Do not re-run it on subsequent loop iterations. Trigger when either condition is true: more than one input artifact was passed, OR a `SPDD_PHASE_RESULT` with `status: completed` already exists in this conversation. Invoke `spdd-session-health` with the target phase and all input paths. Parse the `SPDD_HEALTH_RESULT` and act per the rules in `../../references/orchestrator-contract.md`. Do not invoke any phase skill if the result is `blocked` or `restart`.
 5. Invoke exactly one phase skill.
 6. Require a valid `SPDD_PHASE_RESULT` block from that phase.
-7. Parse `status`, `artifact_type`, `output_files`, `next_phase`, `review_recommended`, and `summary`.
+7. Parse `status`, `artifact_type`, `output_files`, `next_phase`, `review_recommended`, `new_session_recommended`, and `summary`.
 8. Validate that the reported outputs make sense for the phase that just ran.
 9. Record the consumed and produced artifact paths.
-10. Decide whether to stop, ask, or continue based on mode, review gates, `stop-after`, and `next_phase`.
+10. Decide whether to stop, ask, or continue based on mode, review gates, `stop-after`, `next_phase`, and `new_session_recommended`.
 11. If continuing, pass the most relevant produced artifact path into the next phase.
 12. Repeat until completion or blockage.
 
@@ -213,6 +215,8 @@ Validate at minimum:
 - `status` is either `completed` or `blocked`
 - `output_files` is present and contains repository-relative paths when files were created or changed
 - `next_phase` is plausible for the artifact type and workflow position
+- `review_recommended` is `yes` or `no`
+- `new_session_recommended` is `yes` or `no`; must be `yes` when `status: completed` and a durable artifact was written
 - `summary` is a single line
 
 Also validate phase-specific expectations:
@@ -260,8 +264,33 @@ Stop immediately when any of these conditions is true:
 - the correct next input artifact is ambiguous
 - a user-supplied file path is missing, unreadable, or clearly the wrong artifact type for the selected phase, unless the user explicitly says to proceed with current context
 - user clarification is required by a downstream phase contract
+- `new_session_recommended: yes` was emitted by the completed phase AND the active mode is `manual` or `semi-auto` (in `auto` mode, chain to the next phase without stopping)
+- `SPDD_HEALTH_RESULT` with `status: blocked` or `status: restart` was returned by the pre-flight health check (hard stop in all modes)
 
-When stopping, clearly state whether the stop was expected, user-controlled, or due to blockage.
+When stopping due to `new_session_recommended: yes`, print:
+
+```text
+Session boundary reached. Start a new Claude Code session to continue.
+Next phase: /specark:<next_phase> @<output_artifact_path>
+```
+
+When stopping due to `SPDD_HEALTH_RESULT` with `status: blocked`, print:
+
+```text
+Session health check requires input correction before continuing.
+<one line per flag describing what to fix>
+Once corrected, run: /specark:<target_phase> @<corrected_input_path>
+```
+
+When stopping due to `SPDD_HEALTH_RESULT` with `status: restart`, print:
+
+```text
+Session health check blocked continuation.
+Reason: <recommendation from SPDD_HEALTH_RESULT>
+Start a new Claude Code session and run: /specark:<target_phase> @<first_input_path>
+```
+
+For all other stops, clearly state whether the stop was expected, user-controlled, or due to blockage.
 
 ## Resume Behavior
 
