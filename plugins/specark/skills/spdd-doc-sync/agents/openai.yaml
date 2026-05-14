@@ -1,0 +1,8 @@
+interface:
+  display_name: "SPDD Doc Sync"
+  short_description: "Sync in-repo docs with current behavior"
+  brand_color: "#0F766E"
+  default_prompt: "Use $spdd-doc-sync to update the docs after a skill addition, behavior change, or workflow update. Describe what changed, or reference a story or analysis with @."
+
+policy:
+  allow_implicit_invocation: false
