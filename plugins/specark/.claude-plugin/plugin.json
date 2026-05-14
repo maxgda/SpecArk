@@ -1,7 +1,7 @@
 {
   "name": "specark",
-  "description": "Structured Prompt-Driven Development workflow for Claude Code — story creation, analysis, REASONS Canvas prompt generation, implementation, prompt updates, and sync.",
-  "version": "0.3.0",
+  "description": "Structured Prompt-Driven Development workflow for Claude Code — story creation, analysis, REASONS Canvas prompt generation, implementation, prompt updates, sync, and documentation sync.",
+  "version": "0.3.1",
   "author": {
     "name": "maxgda"
   },

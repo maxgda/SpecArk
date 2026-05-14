@@ -2,6 +2,22 @@
 
 All notable changes to this plugin package are documented in this file.
 
+## 0.3.1 — 2026-05-14 — Documentation sync skill
+
+### Added
+
+- `spdd-doc-sync` skill: standalone maintenance skill that keeps human-facing in-repo documentation aligned after any workflow, skill, or behavior change. Uses an explicit routing table to target only affected documentation surfaces and produces an affected-vs-untouched report for every decision.
+- `plugins/specark/references/source-commands/spdd-doc-sync.md`: canonical 11-section source command defining routing rules, per-surface update procedures, guardrails, and the affected-vs-untouched report format.
+- `docs/skills/spdd-doc-sync.md`: dedicated user-facing skill documentation page.
+- `docs/skills/index.md`: new Maintenance skills section listing `spdd-doc-sync`.
+- `docs/.vitepress/config.mjs`: `spdd-doc-sync` added to the skills sidebar after `spdd-sync`.
+- `plugins/specark/CLAUDE.md`: `spdd-doc-sync` row added to the skills reference table.
+
+### Notes
+
+- `spdd-doc-sync` is a terminal maintenance skill: its `SPDD_PHASE_RESULT` block always emits `next_phase: complete`. It does not feed forward into `spdd-generate`.
+- `spdd-doc-sync` and `spdd-sync` are complementary and independent. `spdd-doc-sync` updates human-facing docs; `spdd-sync` updates the structured prompt. Neither replaces the other.
+
 ## 0.3.0 — 2026-05-11 — Session health & UX polish
 
 ### Added

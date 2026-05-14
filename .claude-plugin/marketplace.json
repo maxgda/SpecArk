@@ -8,7 +8,7 @@
       "name": "specark",
       "source": "./plugins/specark",
       "description": "Structured Prompt-Driven Development workflow for Claude Code.",
-      "version": "0.3.0",
+      "version": "0.3.1",
       "category": "engineering",
       "repository": "https://github.com/maxgda/spec-ark",
       "keywords": ["spdd", "requirements", "prompt-driven-development", "reasons-canvas"]

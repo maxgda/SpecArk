@@ -2,6 +2,23 @@
 
 This page tracks release-facing changes at a higher level than the raw changelog.
 
+## 0.3.1 — Documentation sync skill
+
+### Added
+
+- **`spdd-doc-sync` skill**: standalone maintenance skill that keeps human-facing in-repo documentation aligned after any workflow, skill, or behavior change. Accepts a free-form change description and uses an explicit routing table to determine which documentation surfaces to update — and which to leave untouched.
+- **Affected-vs-untouched report**: every invocation produces a structured report listing which documentation files were updated with reasons, and which were deliberately skipped with reasons. Supports auditable, traceable doc changes.
+- **`docs/skills/spdd-doc-sync.md`**: dedicated documentation page explaining when and how to use the skill and how it differs from `spdd-sync`.
+- **Maintenance skills section** added to `docs/skills/index.md`.
+
+### Notes
+
+- `spdd-doc-sync` is a terminal maintenance step — it always emits `next_phase: complete` and does not chain into `spdd-generate`.
+- `spdd-doc-sync` and `spdd-sync` are complementary: run `spdd-sync` to keep the structured prompt accurate, then `spdd-doc-sync` to propagate those changes into the human-facing docs.
+- The skill enforces a hard boundary: it never reads or writes files under `spdd/prompt/` (that path is owned by `spdd-sync`).
+
+---
+
 ## 0.3.0 — Session health & UX polish
 
 ### Added
