@@ -32,6 +32,10 @@ const skills = [
     link: "/skills/spdd-sync"
   },
   {
+    text: "spdd-doc-sync",
+    link: "/skills/spdd-doc-sync"
+  },
+  {
     text: "spdd-api-test",
     link: "/skills/spdd-api-test"
   },
