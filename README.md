@@ -170,17 +170,12 @@ npm run docs:preview
 
 ## Canonical Sources
 
-Source-of-truth workflow text is preserved under:
+Source-of-truth workflow text is split by provenance:
 
-- `plugins/specark/references/source-commands/spdd-story.md`
-- `plugins/specark/references/source-commands/spdd-analysis.md`
-- `plugins/specark/references/source-commands/spdd-reasons-canvas.md`
-- `plugins/specark/references/source-commands/spdd-generate.md`
-- `plugins/specark/references/source-commands/spdd-prompt-update.md`
-- `plugins/specark/references/source-commands/spdd-sync.md`
-- `plugins/specark/references/source-commands/spdd-api-test.md`
+- `plugins/specark/references/source-commands/` for upstream SPDD command text copied from `open-spdd`
+- `plugins/specark/references/local-commands/` for SpecArk-authored command contracts such as `spdd-orchestrator`, `spdd-discovery`, and `spdd-plan`
 
-Provenance metadata lives in `plugins/specark/references/source-commands/SOURCES.md`.
+Provenance metadata for copied upstream commands lives in `plugins/specark/references/source-commands/SOURCES.md`.
 
 ## Credits & Prior Art
 

@@ -23,5 +23,5 @@ These are the remaining tasks before a polished public release.
 1. Run `python3 plugins/specark/scripts/validate_plugin_bundle.py`.
 2. Run `npm run docs:build`.
 3. Restart Codex and verify the plugin is discoverable through `.agents/plugins/marketplace.json`.
-4. Update `CHANGELOG.md`.
+4. Update `CHANGELOG.md` and move any unreleased summary in `docs/release-notes.md` into the final versioned section.
 5. Tag the release after the validation pass is clean.

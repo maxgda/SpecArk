@@ -2,6 +2,27 @@
 
 This page tracks release-facing changes at a higher level than the raw changelog.
 
+## 0.3.2 — Discovery Interview and local command wrappers
+
+### Added
+
+- **`spdd-discovery` skill**: manual Discovery Interview skill for rough ideas, noisy notes, pasted context, or referenced files that need a durable Discovery Brief before planning, story splitting, or technical analysis.
+- **Discovery Brief artifacts**: completed discovery runs write one handoff-ready Markdown artifact under `spdd/discovery/` and recommend exactly one next phase from `spdd-plan`, `spdd-story`, or `spdd-analysis`.
+- **`references/local-commands/` command contracts**: SpecArk-authored command text now lives outside slim `SKILL.md` wrappers for local workflow skills such as `spdd-orchestrator`, `spdd-discovery`, and `spdd-plan`.
+
+### Changed
+
+- `spdd-orchestrator` and `spdd-plan` now use thin wrappers that delegate behavior to local command files, keeping callable skill files smaller while preserving the same workflow contracts.
+- Bundle validation now checks discovery skill files, docs visibility, Discovery Brief naming support, and local command wrapper conventions.
+- Public docs now place discovery before planning and story creation, while noting that discovery is manually invoked until separate orchestrator discovery support lands.
+
+### Notes
+
+- `spdd-discovery` does not generate stories, analysis, prompts, code, or tests. It preserves early product context and hands that context to the next SPDD phase.
+- Automatic orchestrator routing into discovery remains a separate follow-up.
+
+---
+
 ## 0.3.1 — Documentation sync skill
 
 ### Added
@@ -91,10 +112,11 @@ Before publishing a new version:
 1. Run `python3 plugins/specark/scripts/validate_plugin_bundle.py`.
 2. Run `npm run docs:build`.
 3. Review `CHANGELOG.md` and add the final versioned entry.
-4. Verify `plugins/specark/.codex-plugin/plugin.json` and `plugins/specark/.claude-plugin/plugin.json` have correct version and metadata.
-5. Restart Codex and verify the plugin is discoverable from `.agents/plugins/marketplace.json`.
-6. Test Claude Code installation: `claude plugin marketplace add maxgda/spec-ark && claude plugin install specark`.
-7. Tag the release after validation is clean.
+4. Review `docs/release-notes.md` and move any unreleased release summary into the final versioned section.
+5. Verify `plugins/specark/.codex-plugin/plugin.json` and `plugins/specark/.claude-plugin/plugin.json` have correct version and metadata.
+6. Restart Codex and verify the plugin is discoverable from `.agents/plugins/marketplace.json`.
+7. Test Claude Code installation: `claude plugin marketplace add maxgda/spec-ark && claude plugin install specark`.
+8. Tag the release after validation is clean.
 
 ## Suggested release summary format
 

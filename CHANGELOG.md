@@ -2,6 +2,24 @@
 
 All notable changes to this plugin package are documented in this file.
 
+## 0.3.2 — 2026-05-16 — Discovery Interview and local command wrappers
+
+### Added
+
+- `spdd-discovery` skill: manual Discovery Interview skill that turns rough ideas, noisy notes, pasted context, or referenced files into a durable Discovery Brief before planning, story splitting, or analysis.
+- `spdd/discovery/` artifact folder for Discovery Brief handoffs.
+- `plugins/specark/references/local-commands/`: SpecArk-authored command contracts for local workflow skills including `spdd-orchestrator`, `spdd-discovery`, and `spdd-plan`.
+
+### Changed
+
+- `spdd-orchestrator` and `spdd-plan` now use slim wrappers backed by local command files instead of carrying long command bodies directly in `SKILL.md`.
+- Bundle validation now checks discovery docs, discovery artifact naming support, local command wrappers, and metadata for the new skill.
+- User-facing docs now place `spdd-discovery` before planning and story creation while keeping orchestrator discovery routing as a separate follow-up.
+
+### Notes
+
+- `spdd-discovery` is manually invoked in this release and does not generate stories, analysis artifacts, prompts, code, or tests.
+
 ## 0.3.1 — 2026-05-14 — Documentation sync skill
 
 ### Added
