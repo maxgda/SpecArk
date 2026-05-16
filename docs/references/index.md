@@ -8,12 +8,18 @@ These pages summarize the most important shared references inside the plugin.
 - [High-Quality Skill Authoring Guide](/references/high-quality-skill-authoring)
 - [REASONS Canvas Notes](/references/reasons-canvas)
 
-## Source command files
+## Command files
 
-Canonical phase command text remains in the repository under:
+Upstream command text copied from the source SPDD project remains in:
 
 ```text
 plugins/specark/references/source-commands/
 ```
 
-Those files are preserved as the canonical execution sources for the thin phase skills.
+SpecArk-authored command text for local workflow skills lives in:
+
+```text
+plugins/specark/references/local-commands/
+```
+
+Both folders are consumed by thin `SKILL.md` wrappers. `source-commands/` is reserved for copied upstream originals; `local-commands/` is for local command contracts such as orchestration, planning, and discovery.

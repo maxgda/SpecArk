@@ -1,6 +1,6 @@
 # Installation — Codex
 
-SpecArk installs into Codex through the standard plugin marketplace mechanism. One install registers all nine `spdd-*` skills.
+SpecArk installs into Codex through the standard plugin marketplace mechanism. One install registers all twelve `spdd-*` skills.
 
 ## Install from the marketplace
 
@@ -57,6 +57,7 @@ Use the spdd-generate skill on @spdd/prompt/PROMPT-001.md.
 | Action | Command |
 |---|---|
 | Full orchestrated workflow | `Use the spdd-orchestrator skill on @idea.md in semi-auto mode.` |
+| Discovery Interview (manual) | `Use the spdd-discovery skill on @idea.md.` |
 | Planning slice (optional) | `Use the spdd-plan skill on @idea.md.` |
 | Create stories | `Use the spdd-story skill on @requirements/brief.md.` |
 | Run analysis | `Use the spdd-analysis skill on @requirements/STORY-001.md.` |
@@ -65,6 +66,8 @@ Use the spdd-generate skill on @spdd/prompt/PROMPT-001.md.
 | Update prompt after change | `Use the spdd-prompt-update skill on @spdd/prompt/PROMPT-001.md.` |
 | Sync after refactor | `Use the spdd-sync skill on @spdd/prompt/PROMPT-001.md.` |
 | Generate API tests | `Use the spdd-api-test skill on @spdd/prompt/PROMPT-001.md.` |
+| Sync documentation | `Use the spdd-doc-sync skill after this workflow change.` |
+| Check session health | `Use the spdd-session-health skill for spdd-analysis on @requirements/STORY-001.md.` |
 
 ## Keeping the plugin up to date
 
@@ -76,4 +79,4 @@ codex plugin marketplace upgrade
 
 - [Getting Started](/getting-started) — workflow overview and first run
 - [First Feature Tutorial](/first-feature) — end-to-end walkthrough
-- [Skill Index](/skills/) — reference for all nine skills
+- [Skill Index](/skills/) — reference for all twelve skills

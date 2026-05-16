@@ -9,7 +9,7 @@
 
 Structured Prompt-Driven Development, packaged as a Git-distributed plugin bundle for **Codex**, **Claude Code**, and **Claude Cowork**.
 
-SpecArk turns SPDD into an explicit, artifact-driven workflow instead of a loose series of prompts. It helps you move from an idea or requirement to analysis, prompt generation, implementation, and optional verification by handing repository files from one phase to the next.
+SpecArk turns SPDD into an explicit, artifact-driven workflow instead of a loose series of prompts. It helps you move from discovery intake or a requirement to analysis, prompt generation, implementation, and optional verification by handing repository files from one phase to the next.
 
 Use it when your repository needs a repeatable path from broad request to implementation without re-pasting the same context at every step.
 
@@ -75,7 +75,8 @@ Use the spdd-analysis skill on @requirements/STORY-001.md.
 
 The normal SPDD flow is:
 
-0. optional `spdd-plan`
+0a. optional manual `spdd-discovery` for unclear early context
+0b. optional manual `spdd-plan`
 1. `spdd-story`
 2. `spdd-analysis`
 3. `spdd-reasons-canvas`
@@ -84,6 +85,7 @@ The normal SPDD flow is:
 
 Expected project-local artifact folders:
 
+- `spdd/discovery/`
 - `spdd/plan/`
 - `requirements/`
 - `spdd/analysis/`
@@ -154,6 +156,7 @@ npm run docs:preview
 ## Included Skills
 
 - `spdd-orchestrator`: coordinate the workflow across phases and review gates
+- `spdd-discovery`: run a Discovery Interview and write a Discovery Brief before planning, story splitting, or analysis
 - `spdd-plan`: turn broad product direction into ordered delivery slices before story generation
 - `spdd-story`: split a broad requirement into implementation-sized stories
 - `spdd-analysis`: turn a story or requirement into strategic engineering context
@@ -162,6 +165,8 @@ npm run docs:preview
 - `spdd-prompt-update`: update an existing prompt after requirement or design changes
 - `spdd-sync`: sync implementation reality back into the prompt
 - `spdd-api-test`: generate or refresh API-oriented verification assets
+- `spdd-doc-sync`: sync human-facing in-repo documentation after behavior or workflow changes
+- `spdd-session-health`: check session health before heavy phase invocation
 
 ## Canonical Sources
 

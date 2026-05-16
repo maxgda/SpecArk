@@ -15,9 +15,11 @@ MARKETPLACE_JSON = ROOT / ".agents" / "plugins" / "marketplace.json"
 CLAUDE_MARKETPLACE_JSON = ROOT / ".claude-plugin" / "marketplace.json"
 SOURCES_MD = PLUGIN_ROOT / "references" / "source-commands" / "SOURCES.md"
 SKILLS_ROOT = PLUGIN_ROOT / "skills"
+LOCAL_COMMANDS_ROOT = PLUGIN_ROOT / "references" / "local-commands"
 
-REQUIRED_SKILLS = [
+PACKAGED_SKILLS = [
     "spdd-orchestrator",
+    "spdd-discovery",
     "spdd-plan",
     "spdd-story",
     "spdd-analysis",
@@ -28,8 +30,14 @@ REQUIRED_SKILLS = [
     "spdd-api-test",
 ]
 
-RICH_SKILLS = {"spdd-orchestrator", "spdd-plan"}
-CANONICAL_PHASE_SKILLS = set(REQUIRED_SKILLS) - RICH_SKILLS
+ORCHESTRATOR_STARTUP_SKILLS = [
+    skill_name
+    for skill_name in PACKAGED_SKILLS
+    if skill_name not in {"spdd-orchestrator", "spdd-discovery"}
+]
+
+LOCAL_COMMAND_SKILLS = {"spdd-orchestrator", "spdd-discovery", "spdd-plan"}
+CANONICAL_PHASE_SKILLS = set(PACKAGED_SKILLS) - LOCAL_COMMAND_SKILLS
 
 
 def fail(message: str) -> None:
@@ -147,14 +155,57 @@ def validate_skill(skill_name: str) -> None:
         fail(f"canonical reference missing in {skill_md}")
     if f"name: /{skill_name}" in text:
         fail(f"embedded canonical command text should not be duplicated inline in {skill_md}")
+    if skill_name in LOCAL_COMMAND_SKILLS:
+        local_ref = f"`../../references/local-commands/{skill_name}.md`"
+        if local_ref not in text:
+            fail(f"local command reference missing in {skill_md}")
+        validate_local_command(skill_name)
+        validate_skill_metadata(skill_name, openai_yaml)
+        return
+
+    if "SPDD_PHASE_RESULT" not in text:
+        fail(f"{skill_md} must define the standard SPDD phase result block")
+    if "`../../references/orchestrator-contract.md`" not in text:
+        fail(f"{skill_md} must reference orchestrator-contract.md")
+
+    validate_skill_metadata(skill_name, openai_yaml)
+
+
+def validate_local_command(skill_name: str) -> None:
+    command_md = LOCAL_COMMANDS_ROOT / f"{skill_name}.md"
+    if not command_md.exists():
+        fail(f"missing local command file: {command_md}")
+    text = command_md.read_text()
+    if f"name: {skill_name}" not in text:
+        fail(f"frontmatter name missing or incorrect in {command_md}")
+    if len(text.splitlines()) >= 500:
+        fail(f"{command_md} should stay below 500 lines for progressive disclosure")
+
     if skill_name == "spdd-orchestrator":
         if "`../../references/orchestrator-contract.md`" not in text:
-            fail("orchestrator skill must reference the shared orchestrator contract")
-        for phase_skill in REQUIRED_SKILLS:
-            if phase_skill == "spdd-orchestrator":
-                continue
+            fail("orchestrator local command must reference the shared orchestrator contract")
+        for phase_skill in ORCHESTRATOR_STARTUP_SKILLS:
             if f"`../{phase_skill}/SKILL.md`" not in text:
-                fail(f"orchestrator skill must reference ../{phase_skill}/SKILL.md")
+                fail(f"orchestrator local command must reference ../{phase_skill}/SKILL.md")
+        if "`../spdd-discovery/SKILL.md`" in text:
+            fail("orchestrator local command must not require spdd-discovery during startup in this release")
+    elif skill_name == "spdd-discovery":
+        required_terms = [
+            "`../../references/high-quality-skill-authoring.md`",
+            "`../../references/orchestrator-contract.md`",
+            "`../spdd-plan/SKILL.md`",
+            "`../spdd-story/SKILL.md`",
+            "`../spdd-analysis/SKILL.md`",
+            "derive_spdd_filename.py",
+            "SPDD_DISCOVERY_RESULT",
+            "spdd/discovery/",
+            "Discovery Brief",
+        ]
+        for required_term in required_terms:
+            if required_term not in text:
+                fail(f"spdd-discovery local command must reference {required_term}")
+        if "SPDD_PHASE_RESULT" in text:
+            fail("spdd-discovery must use SPDD_DISCOVERY_RESULT, not SPDD_PHASE_RESULT")
     elif skill_name == "spdd-plan":
         required_refs = [
             "`../../references/high-quality-skill-authoring.md`",
@@ -164,15 +215,12 @@ def validate_skill(skill_name: str) -> None:
         ]
         for required_ref in required_refs:
             if required_ref not in text:
-                fail(f"spdd-plan skill must reference {required_ref}")
+                fail(f"spdd-plan local command must reference {required_ref}")
         if "SPDD_PLAN_RESULT" not in text:
-            fail(f"{skill_md} must define the standard planning result block")
-    else:
-        if "SPDD_PHASE_RESULT" not in text:
-            fail(f"{skill_md} must define the standard SPDD phase result block")
-        if "`../../references/orchestrator-contract.md`" not in text:
-            fail(f"{skill_md} must reference orchestrator-contract.md")
+            fail(f"{command_md} must define the standard planning result block")
 
+
+def validate_skill_metadata(skill_name: str, openai_yaml: Path) -> None:
     metadata = openai_yaml.read_text()
     if "allow_implicit_invocation: false" not in metadata:
         fail(f"openai.yaml must disable implicit invocation for {skill_name}")
@@ -218,13 +266,16 @@ def validate_claude_marketplace() -> None:
 
 
 def validate_skill_descriptions_platform_neutral() -> None:
-    for skill_name in REQUIRED_SKILLS:
-        skill_md = SKILLS_ROOT / skill_name / "SKILL.md"
-        if not skill_md.exists():
-            continue
-        text = skill_md.read_text()
-        if "This Codex skill" in text or "This Codex plugin" in text:
-            fail(f"platform-specific 'Codex' wording found in description of {skill_md}")
+    for skill_name in PACKAGED_SKILLS:
+        paths = [SKILLS_ROOT / skill_name / "SKILL.md"]
+        if skill_name in LOCAL_COMMAND_SKILLS:
+            paths.append(LOCAL_COMMANDS_ROOT / f"{skill_name}.md")
+        for path in paths:
+            if not path.exists():
+                continue
+            text = path.read_text()
+            if "This Codex skill" in text or "This Codex plugin" in text:
+                fail(f"platform-specific 'Codex' wording found in description of {path}")
 
 
 def validate_skill_disable_invocation(skill_name: str) -> None:
@@ -244,18 +295,44 @@ def validate_plan_naming_support() -> None:
         fail("derive_spdd_filename.py must emit [Plan] filenames for plan artifacts")
 
 
+def validate_discovery_naming_support() -> None:
+    script = (PLUGIN_ROOT / "scripts" / "derive_spdd_filename.py").read_text()
+    if '"discovery"' not in script:
+        fail("derive_spdd_filename.py must support the discovery artifact kind")
+    if "[Discovery]" not in script:
+        fail("derive_spdd_filename.py must emit [Discovery] filenames for discovery artifacts")
+
+
+def validate_discovery_docs() -> None:
+    docs_page = ROOT / "docs" / "skills" / "spdd-discovery.md"
+    if not docs_page.exists():
+        fail(f"missing discovery docs page: {docs_page}")
+    docs_index = (ROOT / "docs" / "skills" / "index.md").read_text()
+    if "spdd-discovery" not in docs_index:
+        fail("docs/skills/index.md must mention spdd-discovery")
+    vitepress_config = (ROOT / "docs" / ".vitepress" / "config.mjs").read_text()
+    if "spdd-discovery" not in vitepress_config:
+        fail("docs/.vitepress/config.mjs must include the spdd-discovery skill link")
+    readme = (ROOT / "README.md").read_text()
+    workflow = (ROOT / "docs" / "workflow" / "index.md").read_text()
+    if "spdd/discovery/" not in readme and "spdd/discovery/" not in workflow:
+        fail("README.md or docs/workflow/index.md must mention spdd/discovery/")
+
+
 def main() -> None:
     validate_plugin_json()
     validate_marketplace()
     validate_sources()
     validate_shared_references()
-    for skill_name in REQUIRED_SKILLS:
+    for skill_name in PACKAGED_SKILLS:
         validate_skill(skill_name)
     validate_plan_naming_support()
+    validate_discovery_naming_support()
+    validate_discovery_docs()
     validate_claude_plugin_json()
     validate_claude_marketplace()
     validate_skill_descriptions_platform_neutral()
-    for skill_name in REQUIRED_SKILLS:
+    for skill_name in PACKAGED_SKILLS:
         validate_skill_disable_invocation(skill_name)
     print("OK: Codex and Claude Code manifests, marketplaces, canonical sources, and skills validated")
 

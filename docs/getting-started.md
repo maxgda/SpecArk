@@ -56,7 +56,8 @@ Use a manual phase only when you already have the matching artifact:
 
 | Your artifact | Start phase |
 |---|---|
-| Broad idea or noisy PRD | `spdd-plan` → `spdd-story` |
+| Rough idea missing problem, user, outcome, or scope context | `spdd-discovery` |
+| Broad idea or noisy PRD with enough context to slice | `spdd-plan` → `spdd-story` |
 | Broad requirement | `spdd-story` |
 | Focused story or requirement | `spdd-analysis` |
 | Analysis artifact in `spdd/analysis/` | `spdd-reasons-canvas` |
@@ -74,11 +75,12 @@ SpecArk works best when each phase creates a file that becomes the next phase's 
 
 ```
 idea.md
-  └─ requirements/STORY-001.md       ← spdd-story
-       └─ spdd/analysis/ANALYSIS.md  ← spdd-analysis
-            └─ spdd/prompt/PROMPT.md ← spdd-reasons-canvas
-                 └─ implementation   ← spdd-generate
-                      └─ spdd/tests/ ← spdd-api-test (optional)
+  └─ spdd/discovery/DISCOVERY.md     ← spdd-discovery (optional, manual)
+       └─ requirements/STORY-001.md  ← spdd-story
+            └─ spdd/analysis/ANALYSIS.md  ← spdd-analysis
+                 └─ spdd/prompt/PROMPT.md ← spdd-reasons-canvas
+                      └─ implementation   ← spdd-generate
+                           └─ spdd/tests/ ← spdd-api-test (optional)
 ```
 
 ::: tip Good signal

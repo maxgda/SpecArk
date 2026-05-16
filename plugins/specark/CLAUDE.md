@@ -7,6 +7,7 @@ This file is a human-readable overview of the SpecArk plugin. For installation, 
 | Skill | Invocation | Purpose |
 |---|---|---|
 | `spdd-orchestrator` | `/specark:spdd-orchestrator` | Coordinate the full workflow across phases |
+| `spdd-discovery` | `/specark:spdd-discovery` | Run a Discovery Interview and write a Discovery Brief |
 | `spdd-plan` | `/specark:spdd-plan` | Turn broad product direction into delivery slices |
 | `spdd-story` | `/specark:spdd-story` | Decompose a requirement into INVEST-compliant stories |
 | `spdd-analysis` | `/specark:spdd-analysis` | Analyze a story against codebase context |
@@ -21,7 +22,8 @@ This file is a human-readable overview of the SpecArk plugin. For installation, 
 ## Normal workflow sequence
 
 ```
-0. /specark:spdd-plan       (optional — for roadmap-sized input)
+0a. /specark:spdd-discovery (optional, manual — for unclear early context)
+0b. /specark:spdd-plan      (optional, manual — for roadmap-sized input)
 1. /specark:spdd-story      → requirements/STORY-NNN.md
 2. /specark:spdd-analysis   → spdd/analysis/ANALYSIS-NNN.md
 3. /specark:spdd-reasons-canvas → spdd/prompt/PROMPT-NNN.md
@@ -31,6 +33,8 @@ This file is a human-readable overview of the SpecArk plugin. For installation, 
 
 ## Supporting references
 
+- `spdd/discovery/` — project-local Discovery Brief artifacts
+- `references/local-commands/` — local command text for SpecArk-authored skill wrappers
 - `references/source-commands/` — canonical workflow text for each phase skill
 - `references/orchestrator-contract.md` — shared phase result block format
 - `scripts/` — helper utilities for filename derivation and artifact discovery

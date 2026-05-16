@@ -2,6 +2,8 @@
 
 The orchestrator and the phase skills are connected by a standard machine-readable result block. Every phase must emit one of these at the end of its run.
 
+`spdd-discovery` is a manual pre-workflow intake skill and uses its own `SPDD_DISCOVERY_RESULT` block until separate orchestrator discovery support lands.
+
 ## Required result block
 
 ```text
@@ -50,6 +52,7 @@ At minimum, a valid phase handoff should ensure:
 
 | Phase | Expected output location |
 |---|---|
+| `spdd-discovery` | `spdd/discovery/` |
 | `spdd-story` | `requirements/` |
 | `spdd-analysis` | `spdd/analysis/` |
 | `spdd-reasons-canvas` | `spdd/prompt/` |
@@ -90,6 +93,24 @@ END_SPDD_HEALTH_RESULT
 `flags:` and its list items are omitted entirely when no flags are active.
 
 See [spdd-session-health](/skills/spdd-session-health) for the full verdict logic and orchestrator behavior table.
+
+## Discovery result block
+
+Discovery produces a standalone handoff block rather than the standard phase block:
+
+```text
+SPDD_DISCOVERY_RESULT
+status: completed|blocked
+artifact_type: discovery
+output_files:
+- <repo-relative-path|none>
+recommended_next_phase: spdd-plan|spdd-story|spdd-analysis|none
+review_recommended: yes|no
+summary: <single-line summary>
+END_SPDD_DISCOVERY_RESULT
+```
+
+Completed discovery writes a Discovery Brief under `spdd/discovery/` and recommends exactly one next phase. Blocked discovery writes no file and reports `recommended_next_phase: none`.
 
 ## Failure rule
 

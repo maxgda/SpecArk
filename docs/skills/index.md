@@ -1,6 +1,6 @@
 # Skill Index
 
-SpecArk exposes one controller skill, one optional planning skill, seven phase skills, two maintenance skills, and one pre-flight utility. Each skill is configured for explicit invocation — you name the skill you want, and it runs that phase only.
+SpecArk exposes one controller skill, one Discovery Interview skill, one optional planning skill, five phase skills, three maintenance skills, and one pre-flight utility. Each skill is configured for explicit invocation — you name the skill you want, and it runs that phase only.
 
 ## Controller
 
@@ -12,7 +12,13 @@ Coordinates the workflow end to end. Detects the right starting phase, invokes p
 The orchestrator in `semi-auto` mode is the recommended starting point for new users. It handles phase selection and pauses at each review gate.
 :::
 
-## Planning
+## Discovery and Planning
+
+### [spdd-discovery](/skills/spdd-discovery)
+
+Runs a Discovery Interview for early, unclear, or noisy product context. Produces a durable Discovery Brief under `spdd/discovery/` and recommends exactly one next phase.
+
+Use it when a rough idea is missing a problem frame, beneficiaries, desired outcome, or scope boundaries.
 
 ### [spdd-plan](/skills/spdd-plan)
 
@@ -28,14 +34,14 @@ Use it when the input still spans multiple capabilities, dependency chains, or r
 | [spdd-analysis](/skills/spdd-analysis) | Story or focused requirement | `spdd/analysis/` | Need architecture-aware context before prompting |
 | [spdd-reasons-canvas](/skills/spdd-reasons-canvas) | Analysis artifact | `spdd/prompt/` | Ready to produce the implementation prompt |
 | [spdd-generate](/skills/spdd-generate) | Prompt artifact | implementation files | Ready to implement from the prompt |
-| [spdd-prompt-update](/skills/spdd-prompt-update) | Existing prompt + change description | `spdd/prompt/` | Requirements or design changed after prompting |
-| [spdd-sync](/skills/spdd-sync) | Prompt artifact + implementation | `spdd/prompt/` | Implementation drifted from the prompt |
 | [spdd-api-test](/skills/spdd-api-test) | Implementation files or prompt | `spdd/tests/` | API-oriented verification assets are needed |
 
 ## Maintenance skills
 
 | Skill | Input | Output location | Use when |
 |---|---|---|---|
+| [spdd-prompt-update](/skills/spdd-prompt-update) | Existing prompt + change description | `spdd/prompt/` | Requirements or design changed after prompting |
+| [spdd-sync](/skills/spdd-sync) | Prompt artifact + implementation | `spdd/prompt/` | Implementation drifted from the prompt |
 | [spdd-doc-sync](/skills/spdd-doc-sync) | Change description or `@` reference | `docs/`, `README.md`, `CHANGELOG.md`, `plugins/specark/CLAUDE.md` | In-repo docs need updating after a skill addition, behavior change, or workflow update |
 
 ## Pre-flight utility

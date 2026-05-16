@@ -4,7 +4,7 @@ This page is for people extending the plugin itself, not end users running the w
 
 ## Design rules
 
-- Keep phase skills lean when canonical source commands already define the behavior.
+- Keep `SKILL.md` wrappers lean and put command behavior in `references/source-commands/` or `references/local-commands/`.
 - Put shared rules in references or scripts instead of duplicating them across `SKILL.md` files.
 - Preserve file-backed handoff contracts between phases.
 - Treat the orchestrator as workflow control, not as a substitute for downstream phase skills.
@@ -19,9 +19,11 @@ This page is for people extending the plugin itself, not end users running the w
 
 ## Source of truth
 
-Canonical command text lives under `plugins/specark/references/source-commands/`.
+Upstream command text lives under `plugins/specark/references/source-commands/`.
 
-That material should stay authoritative. The skill wrappers should point to it, not re-express it in slightly different ways.
+SpecArk-authored local command text lives under `plugins/specark/references/local-commands/`.
+
+Both forms are authoritative for their wrappers. `source-commands/` is reserved for copied upstream originals; local workflow contracts should use `local-commands/` instead of embedding long behavior in `SKILL.md`.
 
 ## Docs site
 
@@ -43,5 +45,5 @@ GitHub Pages setup (one-time):
 ## Notes for further development
 
 - Keep documentation split between user-facing operation and maintainer-facing release work.
-- Expand skill docs when behavior changes, but avoid turning them into copies of the canonical command files.
+- Expand skill docs when behavior changes, but avoid turning them into copies of command files.
 - If you broaden test generation beyond API workflows, document the new scope clearly in both the README and the skill pages.

@@ -5,7 +5,8 @@ SpecArk expresses SPDD as a sequence of explicit phases, with artifacts passed f
 ## Standard sequence
 
 ```
-0. spdd-plan          (optional — for roadmap-sized input)
+0a. spdd-discovery   (optional, manual — for unclear early context)
+0b. spdd-plan        (optional, manual — for roadmap-sized input)
 1. spdd-story         → requirements/STORY-*.md
 2. spdd-analysis      → spdd/analysis/*.md
 3. spdd-reasons-canvas → spdd/prompt/*.md
@@ -30,6 +31,7 @@ Each phase produces repository files that become the next phase's inputs. The go
 Typical artifact path:
 
 ```text
+spdd/discovery/DISCOVERY-EXAMPLE.md
 spdd/plan/PLAN-EXAMPLE.md
 requirements/STORY-001-example.md
 spdd/analysis/EXAMPLE.md
@@ -40,6 +42,10 @@ spdd/tests/<verification assets>
 
 ::: info spdd-plan and the orchestrator
 `spdd-plan` is explicitly invoked and optional. The orchestrator still starts broad inputs at `spdd-story` until a separate change updates the start-phase contract.
+:::
+
+::: info spdd-discovery and the orchestrator
+`spdd-discovery` is explicitly invoked and optional. Use it before `spdd-plan`, `spdd-story`, or `spdd-analysis` when the problem, users, outcome, or scope boundaries are still unclear. It does not change the orchestrator's default start-phase detection in this release.
 :::
 
 ## Why the workflow matters

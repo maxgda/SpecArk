@@ -308,16 +308,16 @@ Short definition of the skill and its operational purpose.
 - required reporting fields
 ```
 
-## How To Decide Between A Thin Wrapper And A Rich Skill
+## How To Decide Between Source And Local Commands
 
-A thin wrapper is enough when:
+Use an upstream source command wrapper when:
 
 - the canonical source command already contains nearly all behavior
 - the local skill only needs a small amount of repository term mapping
 - there are few branch decisions
 - the workflow is phase-local and not cross-cutting
 
-A rich skill is warranted when:
+Use a local command wrapper when:
 
 - it coordinates multiple other skills
 - it decides routing between several possible workflows
@@ -325,7 +325,7 @@ A rich skill is warranted when:
 - it passes artifacts between phases
 - it needs to interpret user controls that change flow behavior
 
-The orchestrator class of skill should almost always be rich, because orchestration quality depends on explicit decision-making rules.
+Keep `SKILL.md` slim in both cases. Put copied upstream originals under `references/source-commands/`; put SpecArk-authored command contracts under `references/local-commands/`.
 
 ## Review Checklist For Future Skill Edits
 

@@ -25,7 +25,7 @@ Contains the callable skill folders. Each skill includes:
 - `SKILL.md`
 - `agents/openai.yaml`
 
-The phase skills are intentionally thin wrappers around canonical command text. The orchestrator is richer because it coordinates the workflow rather than performing a single phase.
+The callable skills are intentionally thin wrappers. They point either to upstream source command text or to SpecArk-authored local command text.
 
 ### `plugins/specark/references/`
 
@@ -33,7 +33,8 @@ Contains shared reference material that multiple skills may rely on, including:
 
 - orchestration rules
 - REASONS Canvas terminology
-- canonical source command files
+- upstream source command files in `source-commands/`
+- SpecArk local command files in `local-commands/`
 - authoring guidance for future skills
 
 ### `plugins/specark/scripts/`
@@ -45,7 +46,7 @@ Contains helper scripts used by skills or by repository validation. These exist 
 The bundle follows progressive disclosure:
 
 - lightweight metadata triggers a skill
-- `SKILL.md` gives the working instructions
+- `SKILL.md` names the authoritative command file and maps repository terms
 - reference files and scripts carry deeper detail only when needed
 
-This keeps the phase skills small without losing rigor.
+This keeps callable skills small without losing rigor.

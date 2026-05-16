@@ -1,0 +1,8 @@
+interface:
+  display_name: "SPDD Discovery Interview"
+  short_description: "Create a Discovery Brief from early context"
+  brand_color: "#0F766E"
+  default_prompt: "Use $spdd-discovery to turn this rough idea into a Discovery Brief."
+
+policy:
+  allow_implicit_invocation: false

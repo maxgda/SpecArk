@@ -1,7 +1,7 @@
 {
   "name": "specark",
   "version": "0.3.1",
-  "description": "Structured Prompt-Driven Development workflow for story creation, analysis, REASONS Canvas prompt generation, implementation, prompt updates, sync, and documentation sync.",
+  "description": "Structured Prompt-Driven Development workflow for discovery intake, story creation, analysis, REASONS Canvas prompt generation, implementation, prompt updates, sync, and documentation sync.",
   "keywords": [
     "spdd",
     "requirements",
@@ -13,7 +13,7 @@
   "interface": {
     "displayName": "SpecArk",
     "shortDescription": "Structured workflow for prompt-driven delivery",
-    "longDescription": "SpecArk is a Codex plugin for Structured Prompt-Driven Development: story splitting, strategic analysis, REASONS Canvas prompt generation, implementation, prompt updates, sync, and documentation sync.",
+    "longDescription": "SpecArk is a Codex plugin for Structured Prompt-Driven Development: discovery intake, story splitting, strategic analysis, REASONS Canvas prompt generation, implementation, prompt updates, sync, and documentation sync.",
     "category": "Engineering",
     "capabilities": [
       "Read",
@@ -21,6 +21,7 @@
     ],
     "defaultPrompt": [
       "Use the spdd-orchestrator skill on @idea-of-the-enhancement.md in semi-auto mode.",
+      "Use the spdd-discovery skill on @rough-product-notes.md.",
       "Use the spdd-orchestrator skill in resume mode on @spdd/analysis/EXAMPLE.md.",
       "Use the spdd-sync skill on spdd/prompt/EXAMPLE.md after this refactor.",
       "Use the spdd-doc-sync skill. Added the spdd-doc-sync skill — update the docs page, index, VitePress config, and CLAUDE.md."

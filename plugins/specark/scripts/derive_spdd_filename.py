@@ -20,6 +20,8 @@ def derive_filename(args: argparse.Namespace) -> str:
 
     if args.kind == "analysis":
         return f"{args.jira}-{timestamp}-[Analysis]-{slug}.md"
+    if args.kind == "discovery":
+        return f"{args.jira}-{timestamp}-[Discovery]-{slug}.md"
     if args.kind == "plan":
         return f"{args.jira}-{timestamp}-[Plan]-{slug}.md"
     if args.kind == "prompt":
@@ -38,7 +40,7 @@ def derive_filename(args: argparse.Namespace) -> str:
 
 def main() -> int:
     parser = argparse.ArgumentParser(description="Derive SPDD artifact filenames.")
-    parser.add_argument("kind", choices=["analysis", "plan", "prompt", "story", "test"])
+    parser.add_argument("kind", choices=["analysis", "discovery", "plan", "prompt", "story", "test"])
     parser.add_argument("--text", required=True, help="Business text used to derive the description slug.")
     parser.add_argument("--jira", default="GGQPA-XXX")
     parser.add_argument("--timestamp")

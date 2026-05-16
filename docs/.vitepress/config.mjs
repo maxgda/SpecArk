@@ -4,6 +4,10 @@ const skills = [
     link: "/skills/spdd-orchestrator"
   },
   {
+    text: "spdd-discovery",
+    link: "/skills/spdd-discovery"
+  },
+  {
     text: "spdd-plan",
     link: "/skills/spdd-plan"
   },

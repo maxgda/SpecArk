@@ -9,7 +9,7 @@ claude plugin marketplace add maxgda/spec-ark
 claude plugin install specark
 ```
 
-This registers the SpecArk marketplace from GitHub and installs the `specark` plugin, making all nine `spdd-*` skills available as namespaced slash commands.
+This registers the SpecArk marketplace from GitHub and installs the `specark` plugin, making all twelve `spdd-*` skills available as namespaced slash commands.
 
 ## Local development install
 
@@ -29,10 +29,11 @@ Check that the skills are available:
 claude plugin list
 ```
 
-You should see `specark` listed. All nine skills are then invokable as:
+You should see `specark` listed. All twelve skills are then invokable as:
 
 ```
 /specark:spdd-orchestrator
+/specark:spdd-discovery
 /specark:spdd-plan
 /specark:spdd-story
 /specark:spdd-analysis
@@ -41,6 +42,8 @@ You should see `specark` listed. All nine skills are then invokable as:
 /specark:spdd-prompt-update
 /specark:spdd-sync
 /specark:spdd-api-test
+/specark:spdd-doc-sync
+/specark:spdd-session-health
 ```
 
 ## First run
@@ -65,6 +68,7 @@ Or jump directly to the matching phase if you already have an artifact:
 | Action | Command |
 |---|---|
 | Full orchestrated workflow | `/specark:spdd-orchestrator @idea.md semi-auto` |
+| Discovery Interview (manual) | `/specark:spdd-discovery @idea.md` |
 | Planning slice (optional) | `/specark:spdd-plan @idea.md` |
 | Create stories | `/specark:spdd-story @requirements/brief.md` |
 | Run analysis | `/specark:spdd-analysis @requirements/STORY-001.md` |
@@ -73,6 +77,8 @@ Or jump directly to the matching phase if you already have an artifact:
 | Update prompt after change | `/specark:spdd-prompt-update @spdd/prompt/PROMPT-001.md` |
 | Sync after refactor | `/specark:spdd-sync @spdd/prompt/PROMPT-001.md` |
 | Generate API tests | `/specark:spdd-api-test @spdd/prompt/PROMPT-001.md` |
+| Sync documentation | `/specark:spdd-doc-sync "Update docs for this workflow change"` |
+| Check session health | `/specark:spdd-session-health spdd-analysis @requirements/STORY-001.md` |
 
 ## Keeping the plugin up to date
 
@@ -108,4 +114,4 @@ The skill invocation syntax is the same as Claude Code:
 
 - [Getting Started](/getting-started) — workflow overview and first run
 - [First Feature Tutorial](/first-feature) — end-to-end walkthrough
-- [Skill Index](/skills/) — reference for all nine skills
+- [Skill Index](/skills/) — reference for all twelve skills

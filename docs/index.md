@@ -166,12 +166,13 @@ SpecArk is built for teams and repositories that want a disciplined SPDD workflo
 
 ```
 idea.md
-  └─ spdd-plan (optional: when input is roadmap-sized)
-       └─ spdd-story → requirements/STORY-001.md
-            └─ spdd-analysis → spdd/analysis/ANALYSIS-001.md
-                 └─ spdd-reasons-canvas → spdd/prompt/PROMPT-001.md
-                      └─ spdd-generate → implementation files
-                           └─ spdd-api-test → spdd/tests/ (optional)
+  └─ spdd-discovery (optional, manual: when context is unclear)
+       └─ spdd-plan (optional, manual: when input is roadmap-sized)
+            └─ spdd-story → requirements/STORY-001.md
+                 └─ spdd-analysis → spdd/analysis/ANALYSIS-001.md
+                      └─ spdd-reasons-canvas → spdd/prompt/PROMPT-001.md
+                           └─ spdd-generate → implementation files
+                                └─ spdd-api-test → spdd/tests/ (optional)
 ```
 
 Each phase produces a repository file. The next phase reads that file directly — no context re-pasting.

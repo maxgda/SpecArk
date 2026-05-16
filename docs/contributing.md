@@ -4,14 +4,14 @@ SpecArk is small enough that clarity matters more than process overhead.
 
 ## Repository principles
 
-- keep phase skills lean when the canonical source command already defines the behavior
-- make controller skills richer when they coordinate multiple phases or review gates
+- keep `SKILL.md` wrappers lean and point them at command files
+- put SpecArk-authored controller or workflow behavior in `references/local-commands/`
 - preserve file-backed workflow contracts
 - prefer references and scripts over duplicating large procedural text in many places
 
 ## When changing skills
 
-1. Update `SKILL.md`.
+1. Update the relevant command file and keep `SKILL.md` as a slim wrapper.
 2. Update `agents/openai.yaml` when user-facing labels or prompts drift.
 3. Update or add reference files when a rule should be shared across skills.
 4. Re-run the plugin validator.
