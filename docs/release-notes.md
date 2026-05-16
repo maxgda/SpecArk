@@ -2,6 +2,22 @@
 
 This page tracks release-facing changes at a higher level than the raw changelog.
 
+## 0.3.3 — Discovery Interview UX patch
+
+### Changed
+
+- **Stronger interview behavior**: `spdd-discovery` now treats the user's initial prompt as a starting hypothesis and asks focused questions before writing a Discovery Brief.
+- **`generate now` handoff**: users can explicitly say `generate now` when the context is good enough to write the brief.
+- **REASONS-informed checklist**: discovery now uses a concise coverage checklist for Requirements, Entities, Approach, Structure, Operations, Norms, and Safeguards to guide the next question.
+- **Adaptive questioning**: after each relevant answer, the skill re-evaluates the best next question from the current context instead of following a fixed script.
+- **Prompt sync**: the discovery SPDD prompt now matches the implemented local command wrapper and interview behavior.
+
+### Notes
+
+- This patch does not add automatic orchestrator discovery routing or `with-discovery` controls.
+
+---
+
 ## 0.3.2 — Discovery Interview and local command wrappers
 
 ### Added

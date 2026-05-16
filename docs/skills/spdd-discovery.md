@@ -2,6 +2,8 @@
 
 `spdd-discovery` is a Discovery Interview for early, unclear, or noisy product context. It turns rough ideas, mixed notes, pasted context, and referenced repository files into a durable Discovery Brief before planning, story splitting, or technical analysis begins.
 
+The interview is the point of the skill. A new discovery run asks one focused question at a time to help refine the problem, users, outcomes, scope, constraints, and next-phase route before it writes a brief. When the context is good enough, say `generate now` to write the Discovery Brief.
+
 ## Quick start
 
 ::: code-group
@@ -29,10 +31,12 @@ Use the spdd-discovery skill. We need to improve onboarding, but the user proble
 - the product direction is early and needs a clearer problem frame
 - scope boundaries are missing or contested
 - you need pre-planning clarification before `spdd-plan`, `spdd-story`, or `spdd-analysis`
+- you want help navigating and polishing the idea before committing it to a plan or story
 
 ## Do not use it when
 
 - you already have a focused story ready for `spdd-analysis`
+- you already have enough context and want to go directly to `spdd-plan`
 - you already have an analysis artifact in `spdd/analysis/`
 - you need to update an existing prompt
 - you need to sync code changes back into a prompt
@@ -40,9 +44,23 @@ Use the spdd-discovery skill. We need to improve onboarding, but the user proble
 
 ## Output
 
-Completed runs write exactly one Discovery Brief under `spdd/discovery/` and end with a `SPDD_DISCOVERY_RESULT` block. The result recommends exactly one next phase from `spdd-plan`, `spdd-story`, or `spdd-analysis`.
+Completed runs write exactly one Discovery Brief under `spdd/discovery/` after the interview has produced enough user-confirmed context. They end with a `SPDD_DISCOVERY_RESULT` block and recommend exactly one next phase from `spdd-plan`, `spdd-story`, or `spdd-analysis`.
 
 Blocked runs do not write an artifact. They report `output_files: none` and `recommended_next_phase: none`.
+
+## Interview checklist
+
+During the interview, the skill keeps a concise REASONS-informed checklist:
+
+- Requirements: problem, value, outcomes, scope, constraints
+- Entities: users, stakeholders, domain concepts, provider objects
+- Approach: product direction, workflow shape, next-phase fit
+- Structure: artifact locations, command surfaces, integration boundaries
+- Operations: user journey, create/read/update flows, sync behavior
+- Norms: naming, invocation style, local file conventions
+- Safeguards: permissions, provider limits, conflicts, privacy, non-goals
+
+The checklist guides the next question. It is not a form to fill completely before progress can continue.
 
 ## Workflow placement
 

@@ -2,6 +2,20 @@
 
 All notable changes to this plugin package are documented in this file.
 
+## 0.3.3 — 2026-05-16 — Discovery Interview UX patch
+
+### Changed
+
+- Refined `spdd-discovery` so a new run behaves as an actual interview before writing a Discovery Brief.
+- Added explicit `generate now` handling for users who decide the interview has enough context to produce the brief.
+- Added a REASONS-informed Discovery Coverage Checklist covering Requirements, Entities, Approach, Structure, Operations, Norms, and Safeguards.
+- Updated discovery behavior so the next question is re-evaluated after each relevant user answer instead of following a fixed script.
+- Synced the SPDD prompt for the discovery story with the implemented local command wrapper and interview behavior.
+
+### Notes
+
+- This patch keeps `spdd-discovery` manual and does not add orchestrator discovery routing or `with-discovery` controls.
+
 ## 0.3.2 — 2026-05-16 — Discovery Interview and local command wrappers
 
 ### Added
